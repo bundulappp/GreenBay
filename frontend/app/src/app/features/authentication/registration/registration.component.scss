@@ -1,0 +1,15 @@
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .register-container {
+    width: 40vw;
+    height: 50vh;
+    background-color: white;
+  }
+}
