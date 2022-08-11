@@ -1,4 +1,29 @@
 <div class="main-container">
-  <h1>Green Bay Login</h1>
-  <div class="register-container"></div>
+  <h1 class="title">Green Bay Login</h1>
+  <div class="register-container">
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput />
+        <mat-error
+          *ngIf="
+            username?.hasError('required') && password?.hasError('required')
+          "
+          >Username and password are required</mat-error
+        >
+        <mat-error *ngIf="password?.hasError('minlength')"
+          >Password must be 8 characters</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <div class="button-container">
+        <button mat-raised-button color="primary">Sign</button>
+      </div>
+    </form>
+  </div>
 </div>
