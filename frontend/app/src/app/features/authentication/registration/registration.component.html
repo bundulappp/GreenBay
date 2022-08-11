@@ -9,7 +9,7 @@
       <br />
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input formControlName="password" matInput />
+        <input type="password" formControlName="password" matInput />
         <mat-error
           *ngIf="
             username?.hasError('required') && password?.hasError('required')
@@ -22,7 +22,9 @@
       </mat-form-field>
       <br />
       <div class="button-container">
-        <button mat-raised-button color="primary">Sign</button>
+        <button (click)="signUp()" mat-raised-button color="primary">
+          Sign
+        </button>
       </div>
     </form>
   </div>
