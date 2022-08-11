@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../src/app';
-import { userService } from '../src/services/userService';
+import app from '../../src/app';
+import { userService } from '../../src/services/userService';
 
 describe('POST /api/user/register', () => {
   beforeEach(() => {
