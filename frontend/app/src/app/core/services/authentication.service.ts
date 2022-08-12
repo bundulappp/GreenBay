@@ -38,4 +38,9 @@ export class AuthenticationService {
         catchError(() => of())
       );
   }
+
+  logout(): void {
+    this.clearLocalStorage();
+    this.router.navigate(['/login']);
+  }
 }
