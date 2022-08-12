@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegistrationRequestViewModel';
 
 @Component({
   selector: 'app-registration',
@@ -33,7 +34,7 @@ export class RegistrationComponent {
 
   signUp(): void {
     if (this.form.valid) {
-      const user = this.form.getRawValue();
+      const user = this.form.getRawValue() as UserRegistrationRequestViewModel;
       this.authenticationService.register(user).subscribe();
     }
   }
