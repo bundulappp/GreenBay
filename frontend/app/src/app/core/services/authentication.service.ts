@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { UserRegistrationRequestViewModel} from'../../shared/models/UserRegistrationRequestViewModel
-import { UserRegistrationViewModel } from 'src/app/shared/models/UserRegistrationViewModel';
+import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegistrationRequestViewModel';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -28,22 +28,12 @@ export class AuthenticationService {
     localStorage.setItem('username', username);
   }
 
-  register(
-    userData: UserRegistrationRequestViewModel
-  ): Observable<UserRegistrationViewModel> {
+  register(userData: UserRegistrationRequestViewModel): Observable<void> {
     return this.http
-      .post<UserRegistrationViewModel>(
-        `${environment.apiUrl}/user/register`,
-        userData
-      )
+      .post<void>(`${environment.apiUrl}/user/register`, userData)
       .pipe(
-        tap((response) => {
-          if (response !== null) {
-            this.setToken(response.token);
-            this.setUsername(response.username);
-            this.router.navigate(['/login']);
-            return;
-          }
+        tap(() => {
+          this.router.navigate(['/login']);
         }),
         catchError(() => of())
       );
