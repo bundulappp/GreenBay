@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.LoginModule
       ),
   },
+  {
+    path: 'main',
+    loadChildren: () =>
+      import('./features/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
+  },
 ];
 
 @NgModule({
