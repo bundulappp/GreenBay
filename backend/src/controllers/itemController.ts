@@ -3,6 +3,7 @@ import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel
 import { badRequestError } from '../services/generalErrorService';
 import { itemService } from '../services/itemService';
 import { jwtService } from '../services/jwtService';
+import { utilService } from '../services/utilService';
 
 export const itemController = {
   async addNewItem(req: Request, res: Response, next: NextFunction) {
@@ -29,6 +30,18 @@ export const itemController = {
     if (!price) {
       next(badRequestError('Item price is required'));
       return;
+    }
+
+    const isUrlValid = utilService.isValidUrl(photoUrl);
+
+    if (!isUrlValid) {
+      next(badRequestError('PhotoUrl is invalid'));
+    }
+
+    const isPriceValid = utilService.isValidPrice(price);
+
+    if (!isPriceValid) {
+      next(badRequestError('Price should be a positive whole number'));
     }
 
     const newItem: AddNewItemRequestModel = {
