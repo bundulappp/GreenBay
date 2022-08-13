@@ -36,12 +36,14 @@ export const itemController = {
 
     if (!isUrlValid) {
       next(badRequestError('PhotoUrl is invalid'));
+      return;
     }
 
     const isPriceValid = utilService.isValidPrice(price);
 
     if (!isPriceValid) {
       next(badRequestError('Price should be a positive whole number'));
+      return;
     }
 
     const newItem: AddNewItemRequestModel = {
