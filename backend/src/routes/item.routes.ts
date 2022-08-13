@@ -47,6 +47,6 @@ const itemRouter = express.Router();
  *              description: Internal server error
  */
 
-itemRouter.post('/item', itemController.addNewItem);
+itemRouter.post('', itemController.addNewItem);
 
 export default itemRouter;
