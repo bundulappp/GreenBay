@@ -24,7 +24,7 @@ export const userService = {
   async login(
     userData: UserLoginRequestViewModel,
   ): Promise<UserLoginViewModel> {
-    const playerData = await userRepository.getUserByName(userData.name);
+    const playerData = await userRepository.getUserByName(userData.username);
     if (
       !playerData ||
       !passwordService.comparePasswords(userData.password, playerData.password)
@@ -39,7 +39,7 @@ export const userService = {
 
     return {
       token,
-      username: userData.name,
+      username: userData.username,
     };
   },
 };
