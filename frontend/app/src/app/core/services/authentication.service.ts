@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, mapTo, Observable, of, tap } from 'rxjs';
+import { UserLoginRequestViewModel } from 'src/app/shared/models/UserLoginRequestViewModel';
+import { UserLoginViewModel } from 'src/app/shared/models/UserLoginViewModel';
 import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegistrationRequestViewModel';
-
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -36,6 +37,19 @@ export class AuthenticationService {
           this.router.navigate(['/login']);
         }),
         catchError(() => of())
+      );
+  }
+
+  login(loginData: UserLoginRequestViewModel): Observable<void> {
+    return this.http
+      .post<UserLoginViewModel>(`${environment.apiUrl}/user/login`, loginData)
+      .pipe(
+        tap((response) => {
+          this.setToken(response.token);
+          this.setUsername(response.username);
+          this.router.navigate(['/main']);
+        }),
+        mapTo(undefined)
       );
   }
 
