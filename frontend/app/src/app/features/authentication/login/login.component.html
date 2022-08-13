@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="main-container">
+  <h1 class="title">Green Bay Login</h1>
+  <div class="register-container">
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput />
+        <mat-error
+          *ngIf="
+            username?.hasError('required') && password?.hasError('required')
+          "
+          >Username and password are required</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <div class="button-container">
+        <button (click)="login()" mat-raised-button color="primary">
+          LOG IN
+        </button>
+        <div class="sign-up">
+          <p>Don't have an account yet?</p>
+          <a routerLink="/register">Register here</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
