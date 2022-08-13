@@ -1,6 +1,9 @@
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
+import { UserLoginRequestViewModel } from '../models/view/UserLoginRequestViewModel';
+import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
 import { userRepository } from '../repositories/userRepository';
-import { conflictError } from './generalErrorService';
+import { conflictError, unauthorizedError } from './generalErrorService';
+import { jwtService } from './jwtService';
 import { passwordService } from './passwordService';
 
 export const userService = {
@@ -16,5 +19,27 @@ export const userService = {
 
   async checkIfUsernameExists(username: string): Promise<boolean> {
     return !!(await userRepository.getUserByName(username));
+  },
+
+  async login(
+    userData: UserLoginRequestViewModel,
+  ): Promise<UserLoginViewModel> {
+    const playerData = await userRepository.getUserByName(userData.name);
+    if (
+      !playerData ||
+      !passwordService.comparePasswords(userData.password, playerData.password)
+    ) {
+      throw unauthorizedError('Username or password is incorrect!');
+    }
+
+    const token: string = await jwtService.generateAccessToken(
+      playerData.id,
+      playerData.name,
+    );
+
+    return {
+      token,
+      username: userData.name,
+    };
   },
 };
