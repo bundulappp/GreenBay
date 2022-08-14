@@ -26,6 +26,7 @@ exports.up = function (db) {
       },
       name: { type: 'string', notNull: true },
       password: { type: 'string', notNull: true },
+      dollar: { type: 'int', notNull: true, defaultValue: 0 },
     },
     ifNotExists: true,
   });
