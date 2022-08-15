@@ -1,28 +1,30 @@
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
-<p>add works!</p>
+<div class="main-container">
+  <h1 class="title">Add new item</h1>
+  <div class="form-container">
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Item name</mat-label>
+        <input formControlName="itemName" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Photo Url</mat-label>
+        <input formControlName="photoUrl" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input formControlName="price" matInput />
+      </mat-form-field>
+      <br />
+      <div class="button-container">
+        <button (click)="addItem()" mat-raised-button>ADD PRODUCT</button>
+      </div>
+    </form>
+  </div>
+</div>

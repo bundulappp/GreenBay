@@ -14,8 +14,6 @@ import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegi
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  constructor(private authenticationService: AuthenticationService) {}
-
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', [
@@ -23,6 +21,8 @@ export class RegistrationComponent {
       Validators.minLength(8),
     ]),
   });
+
+  constructor(private authenticationService: AuthenticationService) {}
 
   get username(): AbstractControl {
     return this.form.get('username') as AbstractControl;
