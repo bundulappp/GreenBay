@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header/header.component';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    RouterModule,
   ],
   exports: [
     MatFormFieldModule,
