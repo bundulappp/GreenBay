@@ -9,9 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './header/header/header.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent
-  ],
+  declarations: [HeaderComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -26,6 +24,7 @@ import { HeaderComponent } from './header/header/header.component';
     MatButtonModule,
     RouterModule,
     MatSnackBarModule,
+    HeaderComponent,
   ],
 })
 export class SharedModule {}
