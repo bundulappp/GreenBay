@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlerInterceptor } from './core/interceptor/error-handler.interceptor';
+import { TokenInterceptor } from './core/interceptor/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,11 @@ import { ErrorHandlerInterceptor } from './core/interceptor/error-handler.interc
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true,
     },
   ],
