@@ -40,6 +40,7 @@ export const userService = {
     return {
       token,
       username: userData.username,
+      dollar: playerData.dollar,
     };
   },
 };
