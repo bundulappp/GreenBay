@@ -1,1 +1,10 @@
-<p>header works!</p>
+<div class="header">
+  <p class="title">
+    {{ userDollarObservable$ | async | currency: "USD":"symbol" }}
+  </p>
+  <p class="title">Hy {{ userNameObservable$ | async }}!</p>
+  <div class="settings">
+    <button routerLink="/add-item ">Add new item</button>
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>
