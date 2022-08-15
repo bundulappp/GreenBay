@@ -35,9 +35,6 @@ const itemRouter = express.Router();
  *                price:
  *                  type: int
  *                  example: 1200
- *                userId:
- *                  type: int
- *                  example: 1
  *      responses:
  *          201:
  *              description: Created
