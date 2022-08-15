@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  userNameObservable$ = this.authenticationService.userNameObservable$;
+  userDollarObservable$ = this.authenticationService.userDollarObservable$;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {
+  logout(): void {
+    this.authenticationService.logout();
   }
-
 }
