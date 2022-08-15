@@ -4,7 +4,7 @@ import { itemRepository } from '../repositories/itemRepository';
 export const itemService = {
   async addNewItem(newItem: AddNewItemRequestModel) {
     await itemRepository.addNewItem(
-      newItem.name,
+      newItem.itemName,
       newItem.description,
       newItem.photoUrl,
       newItem.price,

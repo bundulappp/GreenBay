@@ -10,9 +10,9 @@ export const itemController = {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
 
-    const { name, description, photoUrl, price } = req.body;
+    const { itemName, description, photoUrl, price } = req.body;
 
-    if (!name) {
+    if (!itemName) {
       next(badRequestError('Item name is required'));
       return;
     }
@@ -47,7 +47,7 @@ export const itemController = {
     }
 
     const newItem: AddNewItemRequestModel = {
-      name,
+      itemName,
       description,
       photoUrl,
       price,

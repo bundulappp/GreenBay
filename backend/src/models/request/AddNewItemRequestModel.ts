@@ -1,5 +1,5 @@
 export interface AddNewItemRequestModel {
-  name: string;
+  itemName: string;
   description: string;
   photoUrl: string;
   price: number;
