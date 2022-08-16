@@ -1,6 +1,12 @@
 .main-container {
   padding-top: 61px;
   mat-grid-tile {
-    background: lightgreen;
+    background: rgb(166, 230, 166);
+  }
+
+  .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
