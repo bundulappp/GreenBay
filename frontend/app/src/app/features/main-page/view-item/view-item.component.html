@@ -1,1 +1,21 @@
-<p>view-item works!</p>
+<div class="card-container">
+  <div class="card">
+    <mat-card>
+      <mat-card-header class="header">
+        <mat-card-title>{{ itemData?.itemName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-subtitle
+        >Sellers name: {{ itemData?.sellersName }}</mat-card-subtitle
+      >
+      <img mat-card-image src="{{ itemData?.photoUrl }}" />
+      <mat-card-content class="main-info">
+        <p>{{ itemData?.description }}</p>
+        <h4>{{ itemData?.price | currency: "USD":"symbol" }}</h4>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button mat-raised-button>BUY</button>
+        <button mat-raised-button>BACK</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
