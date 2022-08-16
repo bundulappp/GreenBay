@@ -5,9 +5,10 @@ import { MainPageComponent } from './main-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddComponent } from './add/add.component';
 import { ViewItemComponent } from './view-item/view-item.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [MainPageComponent, AddComponent, ViewItemComponent],
+  declarations: [MainPageComponent, AddComponent, ViewItemComponent, ListComponent],
   imports: [CommonModule, MainPageRoutingModule, SharedModule],
 })
 export class MainPageModule {}
