@@ -1,8 +1,22 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connection';
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
+import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 
 export const itemRepository = {
+  async getAllSelableItems(userId: number): Promise<ItemDataDomainModel[]> {
+    const getAllSelableQuery: string = `SELECT 
+                  i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
+                                      FROM items i
+                                      JOIN users u
+                                      ON i.userId = u.id
+                                      WHERE selable = ?`;
+
+    return await db.query(getAllSelableQuery, [
+      ItemIsSelable.saleable.toString(),
+    ]);
+  },
+
   async addNewItem(
     name: string,
     description: string,
@@ -36,7 +50,7 @@ export const itemRepository = {
   async getItemById(id: number): Promise<ItemDataDomainModel> {
     const getItemByIdQuery: string = `
                                       SELECT 
-                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.sellable, u.name as sellersName
+                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
                                       FROM items i
                                       JOIN users u
                                           ON i.userId = u.id
@@ -53,10 +67,13 @@ export const itemRepository = {
                                       UPDATE
                                             items
                                       SET
-                                            sellable = 1
+                                            selable = ?
                                       WHERE
                                       id = ?`;
-    await db.query(setItem, [itemId.toString()]);
+    await db.query(setItem, [
+      ItemIsSelable.unsalable.toString(),
+      itemId.toString(),
+    ]);
   },
 
   async setItemSalabilityToFalse(itemId: number): Promise<void> {
@@ -64,9 +81,12 @@ export const itemRepository = {
                                       UPDATE
                                             items
                                       SET
-                                            sellable = 0
+                                            selable = ?
                                       WHERE
                                       id = ?`;
-    await db.query(setItem, [itemId.toString()]);
+    await db.query(setItem, [
+      ItemIsSelable.saleable.toString(),
+      itemId.toString(),
+    ]);
   },
 };
