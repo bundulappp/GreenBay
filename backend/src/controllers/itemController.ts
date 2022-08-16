@@ -61,4 +61,8 @@ export const itemController = {
       next(error);
     }
   },
+
+  getItemData(req: Request, res: Response, next: NextFunction) {
+    const { itemId } = req.params;
+  },
 };
