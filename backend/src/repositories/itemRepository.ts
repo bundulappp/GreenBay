@@ -4,7 +4,7 @@ import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 
 export const itemRepository = {
-  async getAllSelableItems(userId: number): Promise<ItemDataDomainModel[]> {
+  async getAllSelableItems(): Promise<ItemDataDomainModel[]> {
     const getAllSelableQuery: string = `SELECT 
                   i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
                                       FROM items i
