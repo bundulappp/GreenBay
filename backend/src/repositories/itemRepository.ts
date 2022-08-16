@@ -45,7 +45,28 @@ export const itemRepository = {
     const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
       id.toString(),
     ]);
-    console.log(item[0]);
     return item[0];
+  },
+
+  async setItemSalabilityToTrue(itemId: number): Promise<void> {
+    const setItem: string = `
+                                      UPDATE
+                                            items
+                                      SET
+                                            sellable = 1
+                                      WHERE
+                                      id = ?`;
+    await db.query(setItem, [itemId.toString()]);
+  },
+
+  async setItemSalabilityToFalse(itemId: number): Promise<void> {
+    const setItem: string = `
+                                      UPDATE
+                                            items
+                                      SET
+                                            sellable = 0
+                                      WHERE
+                                      id = ?`;
+    await db.query(setItem, [itemId.toString()]);
   },
 };
