@@ -34,4 +34,19 @@ export const userRepository = {
     const userList = await db.query<UserDomainModel[]>(query, [username]);
     return userList[0];
   },
+
+  async getUserById(userId: number): Promise<UserDomainModel> {
+    const query: string = `SELECT
+                                *
+                            FROM
+                                users
+                            WHERE
+                                id = ?
+      `;
+
+    const userList = await db.query<UserDomainModel[]>(query, [
+      userId.toString(),
+    ]);
+    return userList[0];
+  },
 };
