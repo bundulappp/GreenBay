@@ -63,15 +63,15 @@ export const itemController = {
   },
 
   async getItemData(req: Request, res: Response, next: NextFunction) {
-    const { itemId } = req.params;
+    const { id } = req.params;
 
-    if (isNaN(+itemId)) {
-      next(badRequestError('Item id need to be a number'));
+    if (isNaN(+id)) {
+      next(badRequestError('Id is not a number'));
       return;
     }
 
     try {
-      const item = await itemService.getItemData(+itemId);
+      const item = await itemService.getItemData(+id);
       res.status(200).send(item);
     } catch (error) {
       next(error);
