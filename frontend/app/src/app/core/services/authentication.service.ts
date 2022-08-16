@@ -66,7 +66,7 @@ export class AuthenticationService {
           this.setToken(response.token);
           this.setUsername(response.username);
           this.setUserDollar(response.dollar);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/main/list']);
         }),
         mapTo(undefined)
       );
