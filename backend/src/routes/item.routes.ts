@@ -84,7 +84,7 @@ itemRouter.get('/:id', itemController.getItemData);
  *  put:
  *      tags:
  *      - ITEM
- *      description: modify sellable column in items table
+ *      description: modify selable column in items table
  *      parameters:
  *          - in: header
  *            name: authorization

@@ -23,7 +23,7 @@ exports.up = function (db) {
       photoUrl: { type: 'string', notNull: true },
       price: { type: 'int', notNull: true },
       userId: { type: 'int', notNull: true },
-      sellable: { type: 'boolean', notNull: true, defaultValue: false },
+      selable: { type: 'boolean', notNull: true, defaultValue: false },
     },
   });
 };

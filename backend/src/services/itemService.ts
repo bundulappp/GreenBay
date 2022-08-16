@@ -31,6 +31,8 @@ export const itemService = {
     return itemData;
   },
 
+  async getAllSelableItems(userId: number) {},
+
   async setItemSalability(itemId: number, userId: number): Promise<void> {
     const itemData = await itemRepository.getItemById(itemId);
     const userData = await userRepository.getUserById(userId);
@@ -43,7 +45,7 @@ export const itemService = {
       throw unauthorizedError('You can not modify an item if it is not yours');
     }
 
-    itemData.sellable
+    itemData.selable
       ? itemRepository.setItemSalabilityToFalse(itemId)
       : itemRepository.setItemSalabilityToTrue(itemId);
   },
