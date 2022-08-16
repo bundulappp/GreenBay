@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from 'express';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
+import { GetAllSaleableItemViewModel } from '../models/view/GetAllSaleableItemViewModel';
 import { badRequestError } from '../services/generalErrorService';
 import { itemService } from '../services/itemService';
 import { jwtService } from '../services/jwtService';
@@ -73,6 +74,19 @@ export const itemController = {
     try {
       const item = await itemService.getItemData(+id);
       res.status(200).send(item);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getAllSaleableItems(
+    req: Request,
+    res: Response<GetAllSaleableItemViewModel[]>,
+    next: NextFunction,
+  ) {
+    try {
+      const items = await itemService.getAllSelableItems();
+      res.status(200).send(items);
     } catch (error) {
       next(error);
     }

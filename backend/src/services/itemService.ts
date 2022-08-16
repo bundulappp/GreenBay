@@ -1,5 +1,6 @@
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
+import { GetAllSaleableItemViewModel } from '../models/view/GetAllSaleableItemViewModel';
 import { itemRepository } from '../repositories/itemRepository';
 import { userRepository } from '../repositories/userRepository';
 import { notFoundError, unauthorizedError } from './generalErrorService';
@@ -31,7 +32,9 @@ export const itemService = {
     return itemData;
   },
 
-  async getAllSelableItems(userId: number) {},
+  async getAllSelableItems(): Promise<GetAllSaleableItemViewModel[]> {
+    return await itemRepository.getAllSelableItems();
+  },
 
   async setItemSalability(itemId: number, userId: number): Promise<void> {
     const itemData = await itemRepository.getItemById(itemId);
