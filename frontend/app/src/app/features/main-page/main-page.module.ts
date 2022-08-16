@@ -6,9 +6,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddComponent } from './add/add.component';
 import { ViewItemComponent } from './view-item/view-item.component';
 import { ListComponent } from './list/list.component';
+import { ItemComponent } from './list/item/item.component';
 
 @NgModule({
-  declarations: [MainPageComponent, AddComponent, ViewItemComponent, ListComponent],
+  declarations: [MainPageComponent, AddComponent, ViewItemComponent, ListComponent, ItemComponent],
   imports: [CommonModule, MainPageRoutingModule, SharedModule],
 })
 export class MainPageModule {}

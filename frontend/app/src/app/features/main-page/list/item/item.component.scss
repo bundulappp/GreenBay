@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  background: rgb(99, 167, 99);
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
