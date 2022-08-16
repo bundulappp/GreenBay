@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './header/header/header.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -19,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     RouterModule,
     MatCardModule,
+    MatGridListModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -29,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     HeaderComponent,
     MatCardModule,
+    MatGridListModule,
   ],
 })
 export class SharedModule {}
