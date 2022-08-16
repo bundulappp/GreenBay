@@ -11,6 +11,7 @@ export const itemService = {
     if (!user) {
       throw notFoundError('User not found with this id');
     }
+
     await itemRepository.addNewItem(
       newItem.itemName,
       newItem.description,
