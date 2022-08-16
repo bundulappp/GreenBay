@@ -10,7 +10,7 @@ import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequ
 })
 export class AddComponent {
   form = new FormGroup({
-    itemName: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     photoUrl: new FormControl('', Validators.required),
     price: new FormControl(1, Validators.required),
