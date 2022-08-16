@@ -46,4 +46,36 @@ const itemRouter = express.Router();
 
 itemRouter.post('', itemController.addNewItem);
 
+/**
+ * @swagger
+ * /api/item/{id}:
+ *  get:
+ *      tags:
+ *      - ITEM
+ *      description: Get an item
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asdasdawd123
+ *          - in: path
+ *            name: id
+ *            description: ID of item
+ *            schema:
+ *              type: number
+ *              example: 1
+ *      responses:
+ *          200:
+ *              description: Successfull search
+ *          400:
+ *              description: id missing or wrong from path
+ *          404:
+ *              description: Item not found
+ *          500:
+ *              description: Internal server error
+ */
+
+itemRouter.get('/:id', itemController.getItemData);
+
 export default itemRouter;
