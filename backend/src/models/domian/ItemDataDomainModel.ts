@@ -1,5 +1,5 @@
 export interface ItemDataDomainModel {
-  itemId: number;
+  id: number;
   itemName: string;
   description: string;
   photoUrl: string;

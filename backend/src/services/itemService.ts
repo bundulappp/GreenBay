@@ -21,8 +21,8 @@ export const itemService = {
     );
   },
 
-  async getItemData(itemId: number): Promise<ItemDataDomainModel> {
-    const itemData = await itemRepository.getItemById(itemId);
+  async getItemData(id: number): Promise<ItemDataDomainModel> {
+    const itemData = await itemRepository.getItemById(id);
 
     if (!itemData) {
       throw notFoundError('Item not found');

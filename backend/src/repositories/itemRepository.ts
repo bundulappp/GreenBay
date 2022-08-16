@@ -33,7 +33,7 @@ export const itemRepository = {
     return newItemResult.insertId;
   },
 
-  async getItemById(itemId: number): Promise<ItemDataDomainModel> {
+  async getItemById(id: number): Promise<ItemDataDomainModel> {
     const getItemByIdQuery: string = `
                                       SELECT 
                     i.id as id, i.name, i.description, i.photoUrl, i.price, i.sellable, u.name
@@ -43,7 +43,7 @@ export const itemRepository = {
                                       WHERE i.id = ?`;
 
     const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
-      itemId.toString(),
+      id.toString(),
     ]);
 
     return item[0];
