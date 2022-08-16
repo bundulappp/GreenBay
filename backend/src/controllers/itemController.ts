@@ -77,4 +77,22 @@ export const itemController = {
       next(error);
     }
   },
+
+  async setItemSalability(req: Request, res: Response, next: NextFunction) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+    const { id } = req.params;
+
+    if (isNaN(+id)) {
+      next(badRequestError('Item id need to be a number'));
+      return;
+    }
+
+    try {
+      await itemService.setItemSalability(+id, userId);
+      res.status(200).send();
+    } catch (error) {
+      next(error);
+    }
+  },
 };
