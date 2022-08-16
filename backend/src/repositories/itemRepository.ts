@@ -36,7 +36,7 @@ export const itemRepository = {
   async getItemById(id: number): Promise<ItemDataDomainModel> {
     const getItemByIdQuery: string = `
                                       SELECT 
-                    i.id as id, i.name, i.description, i.photoUrl, i.price, i.sellable, u.name
+                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.sellable, u.name as sellersName
                                       FROM items i
                                       JOIN users u
                                           ON i.userId = u.id
@@ -45,7 +45,7 @@ export const itemRepository = {
     const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
       id.toString(),
     ]);
-
+    console.log(item[0]);
     return item[0];
   },
 };
