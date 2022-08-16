@@ -2,7 +2,7 @@ import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
 import { itemRepository } from '../repositories/itemRepository';
 import { userRepository } from '../repositories/userRepository';
-import { notFoundError } from './generalErrorService';
+import { notFoundError, unauthorizedError } from './generalErrorService';
 
 export const itemService = {
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
@@ -29,5 +29,22 @@ export const itemService = {
     }
 
     return itemData;
+  },
+
+  async setItemSalability(itemId: number, userId: number): Promise<void> {
+    const itemData = await itemRepository.getItemById(itemId);
+    const userData = await userRepository.getUserById(userId);
+
+    if (!itemData) {
+      throw notFoundError('Item not found');
+    }
+
+    if (itemData.sellersName !== userData.name) {
+      throw unauthorizedError('You can not modify an item if it is not yours');
+    }
+
+    itemData.sellable
+      ? itemRepository.setItemSalabilityToFalse(itemId)
+      : itemRepository.setItemSalabilityToTrue(itemId);
   },
 };
