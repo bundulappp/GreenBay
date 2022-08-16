@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './header/header/header.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -17,6 +18,7 @@ import { HeaderComponent } from './header/header/header.component';
     ReactiveFormsModule,
     MatButtonModule,
     RouterModule,
+    MatCardModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -26,6 +28,7 @@ import { HeaderComponent } from './header/header/header.component';
     RouterModule,
     MatSnackBarModule,
     HeaderComponent,
+    MatCardModule,
   ],
 })
 export class SharedModule {}
