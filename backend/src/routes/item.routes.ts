@@ -111,4 +111,26 @@ itemRouter.get('/:id', itemController.getItemData);
  */
 itemRouter.put('/modify/:id', itemController.setItemSalability);
 
+/**
+ * @swagger
+ * /api/item:
+ *  get:
+ *      tags:
+ *      - ITEM
+ *      description: Get all saleable items
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asdasdawd123
+ *      responses:
+ *          200:
+ *              description: Successfull search
+ *          500:
+ *              description: Internal server error
+ */
+
+itemRouter.get('', itemController.getAllSaleableItems);
+
 export default itemRouter;
