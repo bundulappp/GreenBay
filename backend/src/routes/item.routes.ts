@@ -78,4 +78,37 @@ itemRouter.post('', itemController.addNewItem);
 
 itemRouter.get('/:id', itemController.getItemData);
 
+/**
+ * @swagger
+ * /api/item/modify/{id}:
+ *  put:
+ *      tags:
+ *      - ITEM
+ *      description: modify sellable column in items table
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asdasda01
+ *          - in: path
+ *            name: id
+ *            description: ID of item
+ *            schema:
+ *              type: number
+ *              example: 1
+ *      responses:
+ *          200:
+ *              description: item updated
+ *          400:
+ *              description: itemId is missing
+ *          401:
+ *              description: Unauthorized
+ *          404:
+ *              description: item not found
+ *          500:
+ *              description: Internal server error
+ */
+itemRouter.put('/modify/:id', itemController.setItemSalability);
+
 export default itemRouter;
