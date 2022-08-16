@@ -1,5 +1,6 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connection';
+import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 
 export const itemRepository = {
   async addNewItem(
@@ -30,5 +31,21 @@ export const itemRepository = {
     ]);
 
     return newItemResult.insertId;
+  },
+
+  async getItemById(itemId: number): Promise<ItemDataDomainModel> {
+    const getItemByIdQuery: string = `
+                                      SELECT 
+                          i.name, i.description, i.photoUrl, i.price, u.name
+                                      FROM items i
+                                      JOIN users u
+                                          ON i.userId = u.id
+                                      WHERE i.id = ?`;
+
+    const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
+      itemId.toString(),
+    ]);
+
+    return item[0];
   },
 };
