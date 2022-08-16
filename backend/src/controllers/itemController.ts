@@ -10,9 +10,9 @@ export const itemController = {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
 
-    const { itemName, description, photoUrl, price } = req.body;
+    const { name, description, photoUrl, price } = req.body;
 
-    if (!itemName) {
+    if (!name) {
       next(badRequestError('Item name is required'));
       return;
     }
@@ -47,7 +47,7 @@ export const itemController = {
     }
 
     const newItem: AddNewItemRequestModel = {
-      itemName,
+      itemName: name,
       description,
       photoUrl,
       price,
@@ -55,8 +55,8 @@ export const itemController = {
     };
 
     try {
-      await itemService.addNewItem(newItem);
-      res.status(201).send();
+      const itemId = await itemService.addNewItem(newItem);
+      res.status(201).send({ itemId });
     } catch (error) {
       next(error);
     }
@@ -66,7 +66,7 @@ export const itemController = {
     const { id } = req.params;
 
     if (isNaN(+id)) {
-      next(badRequestError('Id is not a number'));
+      next(badRequestError('Item id need to be a number'));
       return;
     }
 

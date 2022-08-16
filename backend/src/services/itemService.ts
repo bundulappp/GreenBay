@@ -5,14 +5,14 @@ import { userRepository } from '../repositories/userRepository';
 import { notFoundError } from './generalErrorService';
 
 export const itemService = {
-  async addNewItem(newItem: AddNewItemRequestModel) {
+  async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
     const user = userRepository.getUserById(newItem.userId);
 
     if (!user) {
       throw notFoundError('User not found with this id');
     }
 
-    await itemRepository.addNewItem(
+    return await itemRepository.addNewItem(
       newItem.itemName,
       newItem.description,
       newItem.photoUrl,
