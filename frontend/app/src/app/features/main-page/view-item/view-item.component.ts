@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from 'src/app/core/services/item.service';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 
@@ -13,7 +13,8 @@ export class ViewItemComponent implements OnInit {
 
   constructor(
     private itemService: ItemService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,5 +23,9 @@ export class ViewItemComponent implements OnInit {
         this.itemData = x;
       });
     });
+  }
+
+  backToMain(): void {
+    this.router.navigate(['/main/list']);
   }
 }
