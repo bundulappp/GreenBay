@@ -14,7 +14,6 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getAllSaleableItems().subscribe((x) => {
       this.saleableItemList = x;
-      console.log(this.saleableItemList);
     });
   }
 }
