@@ -1,20 +1,5 @@
 <mat-grid-list cols="3" rowHeight="2:1" class="main-container">
-  <mat-grid-tile class="tile">
-    <app-item></app-item>
-  </mat-grid-tile>
-  <mat-grid-tile class="tile">
-    <app-item></app-item>
-  </mat-grid-tile>
-  <mat-grid-tile class="tile">
-    <app-item></app-item>
-  </mat-grid-tile>
-  <mat-grid-tile class="tile">
-    <app-item></app-item>
-  </mat-grid-tile>
-  <mat-grid-tile class="tile">
-    <app-item></app-item>
-  </mat-grid-tile>
-  <mat-grid-tile class="tile">
+  <mat-grid-tile class="tile" *ngFor="let item of saleableItemList">
     <app-item></app-item>
   </mat-grid-tile>
 </mat-grid-list>

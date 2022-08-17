@@ -32,4 +32,8 @@ export class ItemService {
       `${environment.apiUrl}/item/${itemId}`
     );
   }
+
+  getAllSaleableItems(): Observable<ItemDataViewModel[]> {
+    return this.http.get<ItemDataViewModel[]>(`${environment.apiUrl}/item`);
+  }
 }
