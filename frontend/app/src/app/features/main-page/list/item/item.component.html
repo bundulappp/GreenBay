@@ -1,16 +1,12 @@
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Small</mat-card-subtitle>
-    <img
-      mat-card-sm-image
-      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    />
-  </mat-card-title-group>
-  <mat-card-content>
-    <p>asssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-  </mat-card-content>
-  <div class="button-container">
-    <button mat-flat-button>SHOW MORE</button>
+<div class="main-container">
+  <div class="image-container">
+    <img src="{{ itemData.photoUrl }}" />
   </div>
-</mat-card>
+  <div class="details-container">
+    <h1>{{ itemData.itemName }}</h1>
+    <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
+    <button [routerLink]="['/main/view-item', itemData.id]" mat-raised-button>
+      SHOW MORE
+    </button>
+  </div>
+</div>
