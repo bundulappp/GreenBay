@@ -89,4 +89,15 @@ export const itemRepository = {
       itemId.toString(),
     ]);
   },
+
+  async buyItem(itemId: number): Promise<void> {
+    const setItem: string = `
+                                      UPDATE
+                                            items
+                                      SET
+                                            selable = ?
+                                      WHERE
+                                            id = ?`;
+    await db.query(setItem, [ItemIsSelable.sold.toString(), itemId.toString()]);
+  },
 };
