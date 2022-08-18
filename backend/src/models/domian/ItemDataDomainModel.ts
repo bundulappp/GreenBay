@@ -4,6 +4,6 @@ export interface ItemDataDomainModel {
   description: string;
   photoUrl: string;
   price: number;
-  selable: boolean;
+  selable: number;
   sellersName: string;
 }
