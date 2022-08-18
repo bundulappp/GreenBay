@@ -1,4 +1,4 @@
-<div class="main-container">
+<div *ngIf="itemData" else notFoundId class="main-container">
   <div class="card-container">
     <div class="header">
       <h1>{{ itemData.itemName }}</h1>
@@ -9,6 +9,7 @@
     </div>
     <div class="price-container">
       <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
+      <h4>{{ itemData.description }}</h4>
       <button mat-raised-button color="primary">BUY</button>
     </div>
     <div class="route-back">
