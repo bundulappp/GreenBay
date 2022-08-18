@@ -36,4 +36,11 @@ export class ItemService {
   getAllSaleableItems(): Observable<ItemDataViewModel[]> {
     return this.http.get<ItemDataViewModel[]>(`${environment.apiUrl}/item`);
   }
+
+  setItemSalability(itemId: number): Observable<void> {
+    return this.http.put<void>(
+      `${environment.apiUrl}/item/modify/${itemId}`,
+      null
+    );
+  }
 }
