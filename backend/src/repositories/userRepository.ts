@@ -49,4 +49,24 @@ export const userRepository = {
     ]);
     return userList[0];
   },
+
+  async buyItem(userId: number, price: number): Promise<void> {
+    const buyItemQuery: string = `UPDATE
+                                      users
+                                SET
+                                      dollar = dollar - ?
+                                WHERE 
+                                      id= ?`;
+    await db.query(buyItemQuery, [price.toString(), userId.toString()]);
+  },
+
+  async sellItem(sellersName: string, price: number): Promise<void> {
+    const sellItemQuery = `UPDATE
+                      users
+                    SET
+                      dollar = dollar + ?
+                    WHERE
+                      name = ?`;
+    await db.query(sellItemQuery, [price.toString(), sellersName]);
+  },
 };
