@@ -99,13 +99,15 @@ itemRouter.get('/:id', itemController.getItemData);
  *              example: 1
  *      responses:
  *          200:
- *              description: item updated
+ *              description: Item updated
  *          400:
- *              description: itemId is missing
+ *              description: ItemId is missing
  *          401:
  *              description: Unauthorized
+ *          403:
+ *              description: Forbidden item is already sold
  *          404:
- *              description: item not found
+ *              description: Ftem not found
  *          500:
  *              description: Internal server error
  */

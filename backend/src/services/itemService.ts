@@ -1,9 +1,14 @@
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
+import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
 import { GetAllSaleableItemViewModel } from '../models/view/GetAllSaleableItemViewModel';
 import { itemRepository } from '../repositories/itemRepository';
 import { userRepository } from '../repositories/userRepository';
-import { notFoundError, unauthorizedError } from './generalErrorService';
+import {
+  forbiddenError,
+  notFoundError,
+  unauthorizedError,
+} from './generalErrorService';
 
 export const itemService = {
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
@@ -48,8 +53,12 @@ export const itemService = {
       throw unauthorizedError('You can not modify an item if it is not yours');
     }
 
-    itemData.selable
-      ? itemRepository.setItemSalabilityToFalse(itemId)
-      : itemRepository.setItemSalabilityToTrue(itemId);
+    if (itemData.selable === ItemIsSelable.sold) {
+      throw forbiddenError('Item is already sold');
+    }
+
+    itemData.selable === ItemIsSelable.saleable
+      ? itemRepository.setItemSalabilityToUnsaleable(itemId)
+      : itemRepository.setItemSalabilityToSaleable(itemId);
   },
 };
