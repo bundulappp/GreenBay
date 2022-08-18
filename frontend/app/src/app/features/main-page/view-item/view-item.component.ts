@@ -14,24 +14,17 @@ export class ViewItemComponent implements OnInit {
   itemData: ItemDataViewModel;
   isBelongToUser: boolean;
   ItemIsSelable = ItemIsSelable;
-  checked: boolean;
 
   constructor(
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.itemService.getItemData(params['id']).subscribe((x) => {
         this.itemData = x;
-        if (this.authenticationService.getUsername() === x.sellersName) {
-          this.isBelongToUser = true;
-        } else {
-          this.isBelongToUser = false;
-        }
       });
     });
   }
@@ -41,6 +34,8 @@ export class ViewItemComponent implements OnInit {
   }
 
   setItemStatus(): void {
-    console.log('status');
+    this.itemService.setItemSalability(this.itemData.id).subscribe(() => {
+      this.backToMain();
+    });
   }
 }
