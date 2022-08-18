@@ -1,16 +1,23 @@
 <div class="main-container">
-  <div class="image-container">
-    <img src="{{ itemData.photoUrl }}" />
-  </div>
-  <div class="details-container">
-    <h1>{{ itemData.itemName }}</h1>
-    <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
-    <button
-      [routerLink]="['/main/view-item', itemData.id]"
-      mat-flat-button
-      color="primary"
-    >
-      SHOW MORE
-    </button>
+  <div class="middle-container">
+    <div class="image-container">
+      <img src="{{ itemData.photoUrl }}" />
+    </div>
+    <div class="right">
+      <div class="name-container">
+        <h3>{{ itemData.itemName }}</h3>
+      </div>
+      <div class="price">
+        <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
+      </div>
+      <div class="button-container">
+        <button
+          [routerLink]="['/main/view-item', itemData.id]"
+          mat-raised-button
+        >
+          SHOW MORE
+        </button>
+      </div>
+    </div>
   </div>
 </div>
