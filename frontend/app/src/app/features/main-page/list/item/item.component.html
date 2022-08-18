@@ -5,7 +5,11 @@
   <div class="details-container">
     <h1>{{ itemData.itemName }}</h1>
     <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
-    <button [routerLink]="['/main/view-item', itemData.id]" mat-raised-button>
+    <button
+      [routerLink]="['/main/view-item', itemData.id]"
+      mat-flat-button
+      color="primary"
+    >
       SHOW MORE
     </button>
   </div>
