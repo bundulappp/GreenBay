@@ -62,7 +62,7 @@ export const itemRepository = {
     return item[0];
   },
 
-  async setItemSalabilityToTrue(itemId: number): Promise<void> {
+  async setItemSalabilityToUnsaleable(itemId: number): Promise<void> {
     const setItem: string = `
                                       UPDATE
                                             items
@@ -76,7 +76,7 @@ export const itemRepository = {
     ]);
   },
 
-  async setItemSalabilityToFalse(itemId: number): Promise<void> {
+  async setItemSalabilityToSaleable(itemId: number): Promise<void> {
     const setItem: string = `
                                       UPDATE
                                             items
