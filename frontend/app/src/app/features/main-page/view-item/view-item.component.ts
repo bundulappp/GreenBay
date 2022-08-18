@@ -18,13 +18,20 @@ export class ViewItemComponent implements OnInit {
   constructor(
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.itemService.getItemData(params['id']).subscribe((x) => {
         this.itemData = x;
+
+        if (this.authenticationService.getUsername() === x.sellersName) {
+          this.isBelongToUser = true;
+        } else {
+          this.isBelongToUser = false;
+        }
       });
     });
   }

@@ -15,22 +15,24 @@
       <button mat-raised-button color="primary">BUY</button>
     </div>
     <div class="route-back">
-      <button
-        *ngIf="itemData?.selable === ItemIsSelable.saleable"
-        (click)="setItemStatus()"
-        mat-raised-button
-        color="warn"
-      >
-        Item Disabled
-      </button>
-      <button
-        *ngIf="itemData?.selable === ItemIsSelable.unsalable"
-        (click)="setItemStatus()"
-        mat-raised-button
-        color="accent"
-      >
-        Item Enabled
-      </button>
+      <ng-container *ngIf="isBelongToUser">
+        <button
+          *ngIf="itemData?.selable === ItemIsSelable.saleable"
+          (click)="setItemStatus()"
+          mat-raised-button
+          color="warn"
+        >
+          Item Disabled
+        </button>
+        <button
+          *ngIf="itemData?.selable === ItemIsSelable.unsalable"
+          (click)="setItemStatus()"
+          mat-raised-button
+          color="accent"
+        >
+          Item Enabled
+        </button>
+      </ng-container>
       <button (click)="backToMain()" mat-raised-button color="primary">
         BACK
       </button>
