@@ -66,6 +66,10 @@ export const itemService = {
     const itemData = await itemRepository.getItemById(itemId);
     const userData = await userRepository.getUserById(userId);
 
+    if (!itemData) {
+      throw notFoundError('Item not found');
+    }
+
     if (itemData.sellersName === userData.name) {
       throw forbiddenError('It is your own item, you can not buy it');
     }
