@@ -7,15 +7,24 @@
     <div class="image-container">
       <img src="{{ itemData.photoUrl }}" alt="" />
     </div>
+    <div class="description-container">
+      <h4>{{ itemData.description }}</h4>
+    </div>
     <div class="price-container">
       <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
-      <h4>{{ itemData.description }}</h4>
       <button mat-raised-button color="primary">BUY</button>
     </div>
     <div class="route-back">
       <button (click)="backToMain()" mat-raised-button color="primary">
         BACK
       </button>
+      <mat-slide-toggle
+        *ngIf="isBelongToUser"
+        (change)="setItemStatus()"
+        color="primary"
+        [checked]="checked"
+        >Item disable</mat-slide-toggle
+      >
     </div>
   </div>
 </div>
