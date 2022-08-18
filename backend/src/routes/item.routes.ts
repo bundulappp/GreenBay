@@ -43,7 +43,6 @@ const itemRouter = express.Router();
  *          500:
  *              description: Internal server error
  */
-
 itemRouter.post('', itemController.addNewItem);
 
 /**
@@ -75,7 +74,6 @@ itemRouter.post('', itemController.addNewItem);
  *          500:
  *              description: Internal server error
  */
-
 itemRouter.get('/:id', itemController.getItemData);
 
 /**
@@ -132,7 +130,43 @@ itemRouter.put('/modify/:id', itemController.setItemSalability);
  *          500:
  *              description: Internal server error
  */
-
 itemRouter.get('', itemController.getAllSaleableItems);
+
+/**
+ * @swagger
+ * /api/item/buy:
+ *  put:
+ *      tags:
+ *      - ITEM
+ *      description: Buy an item
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asda21230
+ *          - in: body
+ *            name: itemId
+ *            schema:
+ *              type: object
+ *              properties:
+ *                itemId:
+ *                  type: number
+ *                  example: 1
+ *      responses:
+ *          200:
+ *              description: Item bought
+ *          400:
+ *              description: Bad request
+ *          401:
+ *              description: Unauthorized
+ *          403:
+ *              description: Item not available for buying
+ *          404:
+ *              description: Item not found
+ *          500:
+ *              description: Internal server error
+ */
+itemRouter.put('/buy', itemController.buyItem);
 
 export default itemRouter;

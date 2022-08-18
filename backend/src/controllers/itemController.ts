@@ -113,15 +113,15 @@ export const itemController = {
   async buyItem(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
-    const { id } = req.params;
+    const { itemId } = req.body;
 
-    if (isNaN(+id)) {
+    if (isNaN(+itemId)) {
       next(badRequestError('Item id need to be a number'));
       return;
     }
 
     try {
-      await itemService.buyItem(+id, userId);
+      await itemService.buyItem(+itemId, userId);
       res.status(200).send();
     } catch (error) {
       next(error);
