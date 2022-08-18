@@ -12,18 +12,11 @@
     </div>
     <div class="price-container">
       <h2>{{ itemData?.price | currency: "USD":"symbol" }}</h2>
-      <button mat-raised-button color="primary">BUY</button>
+      <button mat-raised-button>BUY</button>
     </div>
     <div class="route-back">
+      <button (click)="backToMain()" mat-raised-button>BACK</button>
       <ng-container *ngIf="isBelongToUser">
-        <button
-          *ngIf="itemData?.selable === ItemIsSelable.saleable"
-          (click)="setItemStatus()"
-          mat-raised-button
-          color="warn"
-        >
-          Item Disabled
-        </button>
         <button
           *ngIf="itemData?.selable === ItemIsSelable.unsalable"
           (click)="setItemStatus()"
@@ -32,10 +25,15 @@
         >
           Item Enabled
         </button>
+        <button
+          *ngIf="itemData?.selable === ItemIsSelable.saleable"
+          (click)="setItemStatus()"
+          mat-raised-button
+          color="warn"
+        >
+          Item Disabled
+        </button>
       </ng-container>
-      <button (click)="backToMain()" mat-raised-button color="primary">
-        BACK
-      </button>
     </div>
   </div>
 </div>
