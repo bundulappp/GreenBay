@@ -61,4 +61,27 @@ export const itemService = {
       ? itemRepository.setItemSalabilityToUnsaleable(itemId)
       : itemRepository.setItemSalabilityToSaleable(itemId);
   },
+
+  async buyItem(itemId: number, userId: number): Promise<void> {
+    const itemData = await itemRepository.getItemById(itemId);
+    const userData = await userRepository.getUserById(userId);
+
+    if (itemData.sellersName === userData.name) {
+      throw forbiddenError('It is your own item, you can not buy it');
+    }
+
+    if (itemData.selable === ItemIsSelable.unsalable) {
+      throw forbiddenError(
+        'This item is not available now, you can not buy it',
+      );
+    }
+
+    if (itemData.price > userData.dollar) {
+      throw forbiddenError('You have not enough dollars to buy this item');
+    }
+
+    await itemRepository.buyItem(itemId);
+    await userRepository.buyItem(userId, itemData.price);
+    await userRepository.sellItem(itemData.sellersName, itemData.price);
+  },
 };
