@@ -1,22 +1,22 @@
-<div *ngIf="itemData" else notFoundId class="main-container">
+<div class="main-container">
   <div class="card-container">
     <div class="header">
-      <h1>{{ itemData.itemName }}</h1>
-      <h3>Seller: {{ itemData.sellersName }}</h3>
+      <h1>{{ itemData?.itemName }}</h1>
+      <h3>Seller: {{ itemData?.sellersName }}</h3>
     </div>
     <div class="image-container">
-      <img src="{{ itemData.photoUrl }}" alt="" />
+      <img src="{{ itemData?.photoUrl }}" alt="" />
     </div>
     <div class="description-container">
-      <h4>{{ itemData.description }}</h4>
+      <h4>{{ itemData?.description }}</h4>
     </div>
     <div class="price-container">
-      <h2>{{ itemData.price | currency: "USD":"symbol" }}</h2>
+      <h2>{{ itemData?.price | currency: "USD":"symbol" }}</h2>
       <button mat-raised-button color="primary">BUY</button>
     </div>
     <div class="route-back">
       <button
-        *ngIf="itemData.selable === ItemIsSelable.saleable"
+        *ngIf="itemData?.selable === ItemIsSelable.saleable"
         (click)="setItemStatus()"
         mat-raised-button
         color="warn"
@@ -24,7 +24,7 @@
         Item Disabled
       </button>
       <button
-        *ngIf="itemData.selable === ItemIsSelable.unsalable"
+        *ngIf="itemData?.selable === ItemIsSelable.unsalable"
         (click)="setItemStatus()"
         mat-raised-button
         color="accent"
