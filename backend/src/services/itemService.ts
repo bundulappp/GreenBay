@@ -50,7 +50,7 @@ export const itemService = {
     }
 
     if (itemData.sellersName !== userData.name) {
-      throw unauthorizedError('You can not modify an item if it is not yours');
+      throw forbiddenError('You can not modify an item if it is not yours');
     }
 
     if (itemData.selable === ItemIsSelable.sold) {
