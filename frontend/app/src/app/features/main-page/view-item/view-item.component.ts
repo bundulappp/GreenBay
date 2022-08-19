@@ -45,4 +45,8 @@ export class ViewItemComponent implements OnInit {
       this.backToMain();
     });
   }
+
+  buyItem(): void {
+    this.itemService.buyItem(this.itemData.id).subscribe();
+  }
 }

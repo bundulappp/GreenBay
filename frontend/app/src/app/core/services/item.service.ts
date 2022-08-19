@@ -6,12 +6,17 @@ import { AddItemResponseViewModel } from 'src/app/shared/models/AddItemResponseV
 import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequestViewModel';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 import { environment } from 'src/environments/environment';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
   addNewItem(newItemObject: AddNewItemRequestViewModel): Observable<void> {
     return this.http
@@ -42,5 +47,20 @@ export class ItemService {
       `${environment.apiUrl}/item/modify/${itemId}`,
       null
     );
+  }
+
+  buyItem(itemId: number): Observable<void> {
+    return this.http
+      .put<void>(`${environment.apiUrl}/item/buy`, {
+        itemId,
+      })
+      .pipe(
+        tap(() => {
+          this.snackBarService.showSuccessMessage(
+            'You bought the item successfully'
+          );
+          this.router.navigate(['/main/list']);
+        })
+      );
   }
 }

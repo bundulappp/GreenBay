@@ -12,7 +12,7 @@
     </div>
     <div class="price-container">
       <h2>{{ itemData?.price | currency: "USD":"symbol" }}</h2>
-      <button mat-raised-button>BUY</button>
+      <button (click)="buyItem()" mat-raised-button>BUY</button>
     </div>
     <div class="route-back">
       <button (click)="backToMain()" mat-raised-button>BACK</button>
