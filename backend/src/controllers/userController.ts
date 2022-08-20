@@ -87,7 +87,6 @@ export const userController = {
   async getUserDollar(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
-    console.log(userId);
 
     try {
       const user = await userService.getUserDollar(userId);
