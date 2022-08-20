@@ -4,6 +4,7 @@ import { UserLoginRequestViewModel } from '../models/view/UserLoginRequestViewMo
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
 import { UserRegistrationRequestViewModel } from '../models/view/UserRegistrationRequestViewModel';
 import { badRequestError } from '../services/generalErrorService';
+import { jwtService } from '../services/jwtService';
 import { userService } from '../services/userService';
 
 export const userController = {
@@ -76,6 +77,18 @@ export const userController = {
     try {
       const user = await userService.login(loginData);
       response.status(200).send(user);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUserDollar(req: Request, res: Response, next: NextFunction) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const user = await userService.getUserDollar(userId);
+      res.status(200).send(user);
     } catch (error) {
       next(error);
     }
