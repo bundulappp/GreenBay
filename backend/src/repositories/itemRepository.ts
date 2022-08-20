@@ -34,14 +34,18 @@ export const itemRepository = {
 
   async getItemsByUserId(userId: number): Promise<ItemDataDomainModel[]> {
     const getUsersItemQuery: string = `SELECT 
-                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
-                                FROM items i
-                                JOIN users u
-                                    ON i.userId = u.id
-                                WHERE u.id = ?`;
+    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
+                FROM items i
+                JOIN users u
+                    ON i.userId = u.id
+                WHERE u.id = ?
+                AND 
+                 i.selable =?
+                                `;
 
     return await db.query<ItemDataDomainModel[]>(getUsersItemQuery, [
       userId.toString(),
+      ItemIsSelable.unsalable.toString(),
     ]);
   },
 
