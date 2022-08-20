@@ -22,8 +22,10 @@ export const itemService = {
     return await itemRepository.getAllSelableItems();
   },
 
-  async getItemsByUserId(userId: number): Promise<GetItemsByUserIdViewModel[]> {
-    return await itemRepository.getItemsByUserId(userId);
+  async getDisabledItemsByUserId(
+    userId: number,
+  ): Promise<GetItemsByUserIdViewModel[]> {
+    return await itemRepository.getDisabledItemsByUserId(userId);
   },
 
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {

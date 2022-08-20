@@ -48,6 +48,6 @@ userDetailsRouter.get('/money', userController.getUserDollar);
  *          500:
  *              description: Internal server error
  */
-userDetailsRouter.get('/item', itemController.getItemsByUserId);
+userDetailsRouter.get('/item', itemController.getDisabledItemsByUserId);
 
 export default userDetailsRouter;

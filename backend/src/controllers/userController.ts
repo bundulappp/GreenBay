@@ -105,7 +105,7 @@ export const userController = {
     const { userId } = jwtService.getTokenPayload(token);
 
     try {
-      const items = await itemService.getItemsByUserId(userId);
+      const items = await itemService.getDisabledItemsByUserId(userId);
       res.status(200).send(items);
     } catch (error) {
       next(error);

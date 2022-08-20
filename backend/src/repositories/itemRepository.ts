@@ -32,7 +32,9 @@ export const itemRepository = {
     return item[0];
   },
 
-  async getItemsByUserId(userId: number): Promise<ItemDataDomainModel[]> {
+  async getDisabledItemsByUserId(
+    userId: number,
+  ): Promise<ItemDataDomainModel[]> {
     const getUsersItemQuery: string = `SELECT 
     i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
                 FROM items i
