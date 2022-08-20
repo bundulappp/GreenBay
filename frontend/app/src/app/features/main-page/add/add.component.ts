@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ItemService } from 'src/app/core/services/item.service';
 import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequestViewModel';
 
@@ -16,12 +17,16 @@ export class AddComponent {
     price: new FormControl(1, Validators.required),
   });
 
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService, private router: Router) {}
 
   addItem() {
     if (this.form.valid) {
       const item = this.form.getRawValue() as AddNewItemRequestViewModel;
       this.itemService.addNewItem(item).subscribe();
     }
+  }
+
+  back(): void {
+    this.router.navigate(['/main/list']);
   }
 }
