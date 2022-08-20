@@ -9,6 +9,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './header/header/header.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -21,6 +24,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     RouterModule,
     MatCardModule,
     MatGridListModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    MatIconModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -32,6 +38,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HeaderComponent,
     MatCardModule,
     MatGridListModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    MatIconModule,
   ],
 })
 export class SharedModule {}
