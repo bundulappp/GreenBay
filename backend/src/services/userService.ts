@@ -1,6 +1,7 @@
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginRequestViewModel } from '../models/view/UserLoginRequestViewModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
+import { UserWithDollarViewModel } from '../models/view/UserWithDollarViewModel';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError, unauthorizedError } from './generalErrorService';
 import { jwtService } from './jwtService';
@@ -41,6 +42,14 @@ export const userService = {
       token,
       username: userData.username,
       dollar: playerData.dollar,
+    };
+  },
+
+  async getUserDollar(userId: number): Promise<UserWithDollarViewModel> {
+    const userData = await userRepository.getUserById(userId);
+
+    return {
+      dollar: userData.dollar,
     };
   },
 };
