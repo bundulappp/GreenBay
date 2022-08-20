@@ -1,5 +1,26 @@
-<mat-grid-list cols="4" rowHeight="2:1" class="main-container">
-  <mat-grid-tile class="tile" *ngFor="let item of saleableItemList">
-    <app-item [itemData]="item"></app-item>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="main-container">
+  <div class="toggle-container">
+    <mat-slide-toggle
+      [(ngModel)]="hideDiseabled"
+      (change)="setItemList()"
+      color="primary"
+      class="example-margin"
+      >Show my disabled items</mat-slide-toggle
+    >
+  </div>
+
+  <div class="list">
+    <mat-grid-list cols="4" rowHeight="2:1">
+      <ng-container *ngIf="!hideDiseabled" else showDisabled>
+        <mat-grid-tile class="tile" *ngFor="let item of enabledList">
+          <app-item [itemData]="item"></app-item>
+        </mat-grid-tile>
+      </ng-container>
+      <ng-container #showDisabled>
+        <mat-grid-tile class="tile" *ngFor="let item of diseabledList">
+          <app-item [itemData]="item"></app-item>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </div>
+</div>
