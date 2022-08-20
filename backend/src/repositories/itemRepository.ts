@@ -40,7 +40,9 @@ export const itemRepository = {
                                     ON i.userId = u.id
                                 WHERE u.id = ?`;
 
-    return await db.query(getUsersItemQuery, [userId.toString()]);
+    return await db.query<ItemDataDomainModel[]>(getUsersItemQuery, [
+      userId.toString(),
+    ]);
   },
 
   async addNewItem(
