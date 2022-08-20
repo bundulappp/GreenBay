@@ -28,12 +28,6 @@ export const itemService = {
     return await itemRepository.getDisabledItemsByUserId(userId);
   },
 
-  async sortItemByQueryParam(
-    queryParam: string,
-  ): Promise<GetAllSaleableItemViewModel[]> {
-    return await itemRepository.sortItemByQueryParam(queryParam);
-  },
-
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
     const user = userRepository.getUserById(newItem.userId);
 
