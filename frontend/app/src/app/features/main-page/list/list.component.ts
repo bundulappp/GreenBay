@@ -8,12 +8,23 @@ import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  saleableItemList: ItemDataViewModel[];
+  enabledList: ItemDataViewModel[];
+  diseabledList: ItemDataViewModel[];
+  hideDiseabled: boolean = false;
+
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
     this.itemService.getAllSaleableItems().subscribe((x) => {
-      this.saleableItemList = x;
+      this.enabledList = x;
     });
+
+    this.itemService.getDisabledUserItem().subscribe((x) => {
+      this.diseabledList = x;
+    });
+  }
+
+  setItemList(): void {
+    this.hideDiseabled === !this.hideDiseabled;
   }
 }
