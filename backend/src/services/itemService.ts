@@ -11,6 +11,24 @@ import {
 } from './generalErrorService';
 
 export const itemService = {
+  async getItemData(id: number): Promise<ItemDataDomainModel> {
+    const itemData = await itemRepository.getItemById(id);
+
+    if (!itemData) {
+      throw notFoundError('Item not found');
+    }
+
+    return itemData;
+  },
+
+  async getAllSelableItems(): Promise<GetAllSaleableItemViewModel[]> {
+    return await itemRepository.getAllSelableItems();
+  },
+
+  async getItemByUserId(userId: number): Promise<ItemDataDomainModel[]> {
+    return await itemRepository.getItemByUserId(userId);
+  },
+
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
     const user = userRepository.getUserById(newItem.userId);
 
@@ -25,20 +43,6 @@ export const itemService = {
       newItem.price,
       newItem.userId,
     );
-  },
-
-  async getItemData(id: number): Promise<ItemDataDomainModel> {
-    const itemData = await itemRepository.getItemById(id);
-
-    if (!itemData) {
-      throw notFoundError('Item not found');
-    }
-
-    return itemData;
-  },
-
-  async getAllSelableItems(): Promise<GetAllSaleableItemViewModel[]> {
-    return await itemRepository.getAllSelableItems();
   },
 
   async setItemSalability(itemId: number, userId: number): Promise<void> {

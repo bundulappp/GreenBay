@@ -32,7 +32,7 @@ export const itemRepository = {
     return item[0];
   },
 
-  async getItemByUserId(): Promise<ItemDataDomainModel[]> {
+  async getItemByUserId(userId: number): Promise<ItemDataDomainModel[]> {
     const getUsersItemQuery: string = `SELECT 
                     i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
                                 FROM items i
@@ -40,7 +40,7 @@ export const itemRepository = {
                                     ON i.userId = u.id
                                 WHERE u.id = ?`;
 
-    return await db.query(getUsersItemQuery, []);
+    return await db.query(getUsersItemQuery, [userId.toString()]);
   },
 
   async addNewItem(
