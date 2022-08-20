@@ -2,13 +2,10 @@ import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
 import { GetAllSaleableItemViewModel } from '../models/view/GetAllSaleableItemViewModel';
+import { GetItemsByUserIdViewModel } from '../models/view/GetItemsByUserIdViewModel';
 import { itemRepository } from '../repositories/itemRepository';
 import { userRepository } from '../repositories/userRepository';
-import {
-  forbiddenError,
-  notFoundError,
-  unauthorizedError,
-} from './generalErrorService';
+import { forbiddenError, notFoundError } from './generalErrorService';
 
 export const itemService = {
   async getItemData(id: number): Promise<ItemDataDomainModel> {
@@ -25,8 +22,8 @@ export const itemService = {
     return await itemRepository.getAllSelableItems();
   },
 
-  async getItemByUserId(userId: number): Promise<ItemDataDomainModel[]> {
-    return await itemRepository.getItemByUserId(userId);
+  async getItemsByUserId(userId: number): Promise<GetItemsByUserIdViewModel[]> {
+    return await itemRepository.getItemsByUserId(userId);
   },
 
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
