@@ -15,6 +15,7 @@ const swaggerOptions: SwaggerOptions = {
     './src/routes/user.routes.ts',
     './src/routes/api.routes.ts',
     './src/routes/item.routes.ts',
+    './src/routes/userDetails.routes.ts',
   ],
 };
 

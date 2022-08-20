@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
+import { GetItemsByUserIdViewModel } from '../models/view/GetItemsByUserIdViewModel';
 import { UserLoginRequestViewModel } from '../models/view/UserLoginRequestViewModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
 import { UserRegistrationRequestViewModel } from '../models/view/UserRegistrationRequestViewModel';
 import { badRequestError } from '../services/generalErrorService';
+import { itemService } from '../services/itemService';
 import { jwtService } from '../services/jwtService';
 import { userService } from '../services/userService';
 
@@ -85,10 +87,27 @@ export const userController = {
   async getUserDollar(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
+    console.log(userId);
 
     try {
       const user = await userService.getUserDollar(userId);
       res.status(200).send(user);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUserItems(
+    req: Request,
+    res: Response<GetItemsByUserIdViewModel[]>,
+    next: NextFunction,
+  ) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const items = await itemService.getItemsByUserId(userId);
+      res.status(200).send(items);
     } catch (error) {
       next(error);
     }

@@ -68,27 +68,4 @@ userRouter.post('/register', userController.register);
 
 userRouter.post('/login', userController.login);
 
-/**
- * @swagger
- * /api/user/money:
- *  get:
- *      tags:
- *      - USER
- *      description: Get user dollars
- *      parameters:
- *          - in: header
- *            name: authorization
- *            schema:
- *              type: string
- *              example: Bearer asdad20131
- *      responses:
- *          200:
- *              description: Data send successfully
- *          404:
- *              description: User not found
- *          500:
- *              description: Internal server error
- */
-userRouter.get('/money', userController.getUserDollar);
-
 export default userRouter;
