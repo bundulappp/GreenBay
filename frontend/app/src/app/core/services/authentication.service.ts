@@ -80,7 +80,7 @@ export class AuthenticationService {
 
   getUserInfo(): Observable<UserWithDollarViewModel> {
     return this.http.get<UserWithDollarViewModel>(
-      `${environment.apiUrl}/user/money`
+      `${environment.apiUrl}/user-details/money`
     );
   }
 }
