@@ -11,12 +11,12 @@
 
   <div class="list">
     <mat-grid-list cols="4" rowHeight="2:1">
-      <ng-container *ngIf="!hideDiseabled" else showDisabled>
+      <ng-container *ngIf="!hideDiseabled">
         <mat-grid-tile class="tile" *ngFor="let item of enabledList">
           <app-item [itemData]="item"></app-item>
         </mat-grid-tile>
       </ng-container>
-      <ng-container #showDisabled>
+      <ng-container *ngIf="hideDiseabled">
         <mat-grid-tile class="tile" *ngFor="let item of diseabledList">
           <app-item [itemData]="item"></app-item>
         </mat-grid-tile>
