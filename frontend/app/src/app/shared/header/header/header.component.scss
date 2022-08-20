@@ -15,7 +15,9 @@
 }
 
 .title {
+  text-align: center;
   margin-bottom: 0;
+  margin-right: 10px;
   margin-left: 53px;
   font-size: 27px;
   font-weight: bolder;
@@ -33,4 +35,8 @@
   margin-right: 30px;
   font-weight: bolder;
   cursor: pointer;
+
+  mat-slide-toggle {
+    font-size: 18px;
+  }
 }
