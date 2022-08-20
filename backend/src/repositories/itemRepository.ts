@@ -17,6 +17,32 @@ export const itemRepository = {
     ]);
   },
 
+  async getItemById(id: number): Promise<ItemDataDomainModel> {
+    const getItemByIdQuery: string = `
+                                      SELECT 
+                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
+                                      FROM items i
+                                      JOIN users u
+                                          ON i.userId = u.id
+                                      WHERE i.id = ?`;
+
+    const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
+      id.toString(),
+    ]);
+    return item[0];
+  },
+
+  async getItemByUserId(): Promise<ItemDataDomainModel[]> {
+    const getUsersItemQuery: string = `SELECT 
+                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
+                                FROM items i
+                                JOIN users u
+                                    ON i.userId = u.id
+                                WHERE u.id = ?`;
+
+    return await db.query(getUsersItemQuery, []);
+  },
+
   async addNewItem(
     name: string,
     description: string,
@@ -45,21 +71,6 @@ export const itemRepository = {
     ]);
 
     return newItemResult.insertId;
-  },
-
-  async getItemById(id: number): Promise<ItemDataDomainModel> {
-    const getItemByIdQuery: string = `
-                                      SELECT 
-                    i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
-                                      FROM items i
-                                      JOIN users u
-                                          ON i.userId = u.id
-                                      WHERE i.id = ?`;
-
-    const item = await db.query<ItemDataDomainModel[]>(getItemByIdQuery, [
-      id.toString(),
-    ]);
-    return item[0];
   },
 
   async setItemSalabilityToUnsaleable(itemId: number): Promise<void> {
