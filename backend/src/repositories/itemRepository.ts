@@ -119,4 +119,17 @@ export const itemRepository = {
                                             id = ?`;
     await db.query(setItem, [ItemIsSelable.sold.toString(), itemId.toString()]);
   },
+
+  async sortItemByQueryParam(
+    queryParam: string,
+  ): Promise<ItemDataDomainModel[]> {
+    const query: string = `SELECT 
+i.id as id, i.name as itemName, i.description, i.photoUrl, i.price, i.selable, u.name as sellersName
+                      FROM items i
+                      JOIN users u
+                           ON i.userId = u.id
+                      Order by 
+                      ?`;
+    return await db.query<ItemDataDomainModel[]>(query, [queryParam]);
+  },
 };
