@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, mapTo, Observable, of, tap } from 'rxjs';
 import { UserLoginRequestViewModel } from 'src/app/shared/models/UserLoginRequestViewModel';
 import { UserLoginViewModel } from 'src/app/shared/models/UserLoginViewModel';
 import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegistrationRequestViewModel';
+import { UserWithDollarViewModel } from 'src/app/shared/models/UserWithDollarViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -75,5 +76,11 @@ export class AuthenticationService {
   logout(): void {
     this.clearLocalStorage();
     this.router.navigate(['/login']);
+  }
+
+  getUserInfo(): Observable<UserWithDollarViewModel> {
+    return this.http.get<UserWithDollarViewModel>(
+      `${environment.apiUrl}/user/money`
+    );
   }
 }

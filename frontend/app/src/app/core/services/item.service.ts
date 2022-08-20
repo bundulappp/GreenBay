@@ -6,6 +6,7 @@ import { AddItemResponseViewModel } from 'src/app/shared/models/AddItemResponseV
 import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequestViewModel';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from './authentication.service';
 import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class ItemService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private authenticationService: AuthenticationService
   ) {}
 
   addNewItem(newItemObject: AddNewItemRequestViewModel): Observable<void> {
@@ -59,6 +61,9 @@ export class ItemService {
           this.snackBarService.showSuccessMessage(
             'You bought the item successfully'
           );
+          this.authenticationService.getUserInfo().subscribe((x) => {
+            this.authenticationService.setUserDollar(x.dollar);
+          });
           this.router.navigate(['/main/list']);
         })
       );
