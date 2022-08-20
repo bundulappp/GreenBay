@@ -6,6 +6,58 @@ const itemRouter = express.Router();
 /**
  * @swagger
  * /api/item:
+ *  get:
+ *      tags:
+ *      - ITEM
+ *      description: Get all saleable items
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asdasdawd123
+ *      responses:
+ *          200:
+ *              description: Successfull search
+ *          500:
+ *              description: Internal server error
+ */
+itemRouter.get('', itemController.getAllSaleableItems);
+
+/**
+ * @swagger
+ * /api/item/{id}:
+ *  get:
+ *      tags:
+ *      - ITEM
+ *      description: Get an item
+ *      parameters:
+ *          - in: header
+ *            name: authorization
+ *            schema:
+ *              type: string
+ *              example: Bearer asdasdawd123
+ *          - in: path
+ *            name: id
+ *            description: ID of item
+ *            schema:
+ *              type: number
+ *              example: 1
+ *      responses:
+ *          200:
+ *              description: Successfull search
+ *          400:
+ *              description: id missing or wrong from path
+ *          404:
+ *              description: Item not found
+ *          500:
+ *              description: Internal server error
+ */
+itemRouter.get('/:id', itemController.getItemData);
+
+/**
+ * @swagger
+ * /api/item:
  *  post:
  *      tags:
  *      - ITEM
@@ -47,37 +99,6 @@ itemRouter.post('', itemController.addNewItem);
 
 /**
  * @swagger
- * /api/item/{id}:
- *  get:
- *      tags:
- *      - ITEM
- *      description: Get an item
- *      parameters:
- *          - in: header
- *            name: authorization
- *            schema:
- *              type: string
- *              example: Bearer asdasdawd123
- *          - in: path
- *            name: id
- *            description: ID of item
- *            schema:
- *              type: number
- *              example: 1
- *      responses:
- *          200:
- *              description: Successfull search
- *          400:
- *              description: id missing or wrong from path
- *          404:
- *              description: Item not found
- *          500:
- *              description: Internal server error
- */
-itemRouter.get('/:id', itemController.getItemData);
-
-/**
- * @swagger
  * /api/item/modify/{id}:
  *  put:
  *      tags:
@@ -110,27 +131,6 @@ itemRouter.get('/:id', itemController.getItemData);
  *              description: Internal server error
  */
 itemRouter.put('/modify/:id', itemController.setItemSalability);
-
-/**
- * @swagger
- * /api/item:
- *  get:
- *      tags:
- *      - ITEM
- *      description: Get all saleable items
- *      parameters:
- *          - in: header
- *            name: authorization
- *            schema:
- *              type: string
- *              example: Bearer asdasdawd123
- *      responses:
- *          200:
- *              description: Successfull search
- *          500:
- *              description: Internal server error
- */
-itemRouter.get('', itemController.getAllSaleableItems);
 
 /**
  * @swagger
