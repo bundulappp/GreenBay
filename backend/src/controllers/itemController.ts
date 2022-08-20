@@ -37,17 +37,6 @@ export const itemController = {
     }
   },
 
-  async sortItemByQueryParam(req: Request, res: Response, next: NextFunction) {
-    const { sortBy } = req.params;
-
-    try {
-      const result = await itemService.sortItemByQueryParam(sortBy);
-      res.status(200).send(result);
-    } catch (err) {
-      next(err);
-    }
-  },
-
   async addNewItem(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
