@@ -69,7 +69,7 @@ export class ItemService {
       );
   }
 
-  getDisabledUserItem(item: number): Observable<ItemDataViewModel[]> {
+  getDisabledUserItem(): Observable<ItemDataViewModel[]> {
     return this.http.get<ItemDataViewModel[]>(
       `${environment.apiUrl}/user-details/item`
     );
