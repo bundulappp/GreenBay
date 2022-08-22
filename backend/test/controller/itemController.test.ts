@@ -156,7 +156,7 @@ describe('GET /api/item/:id', () => {
   });
 });
 
-describe('PUT /api/item/:id', () => {
+describe('PUT /api/item/selable/:id', () => {
   const token = 'Bearer asdaslkp212';
   const tokenData = {
     userId: 1,
@@ -173,7 +173,7 @@ describe('PUT /api/item/:id', () => {
     const itemId = 45;
     itemRepository.getItemById = jest.fn().mockResolvedValue(null);
     //Act
-    const result = await request(app).put(`/api/item/${itemId}`).send();
+    const result = await request(app).put(`/api/item/selable/${itemId}`).send();
     //Assert
     expect(result.statusCode).toEqual(404);
   });
@@ -183,7 +183,7 @@ describe('PUT /api/item/:id', () => {
     const itemId = 'fourty-five';
     itemRepository.getItemById = jest.fn().mockResolvedValue(null);
     //Act
-    const result = await request(app).get(`/api/item/${itemId}`).send();
+    const result = await request(app).put(`/api/item/selable/${itemId}`).send();
     //Assert
     expect(result.statusCode).toEqual(400);
   });
@@ -193,7 +193,7 @@ describe('PUT /api/item/:id', () => {
     const itemId = 1;
     itemService.setItemSalability = jest.fn();
     //Act
-    const result = await request(app).put(`/api/item/${itemId}`).send();
+    const result = await request(app).put(`/api/item/selable/${itemId}`).send();
     //Assert
     expect(result.statusCode).toEqual(200);
   });
@@ -209,6 +209,24 @@ describe('PUT /api/item/buy', () => {
     jwtService.verifyToken = jest.fn().mockReturnValue(true);
     jwtService.getTokenPayload = jest.fn().mockReturnValue(tokenData);
     console.error = jest.fn();
+  });
+
+  it('itemId is missing and get 400', async () => {
+    //Arrange
+    //Act
+    const result = await request(app).put('/api/item/buy').send({});
+    //Assert
+    expect(result.statusCode).toEqual(400);
+  });
+
+  it('item bought successfully and get 200', async () => {
+    //Arrange
+    const itemId = 1;
+    itemService.buyItem = jest.fn();
+    //Act
+    const result = await request(app).put('/api/item/buy').send({ itemId });
+    //Assert
+    expect(result.statusCode).toEqual(200);
   });
 });
 //Arrange
