@@ -45,10 +45,7 @@ export class ItemService {
   }
 
   setItemSalability(itemId: number): Observable<void> {
-    return this.http.put<void>(
-      `${environment.apiUrl}/item/modify/${itemId}`,
-      null
-    );
+    return this.http.put<void>(`${environment.apiUrl}/item/${itemId}`, null);
   }
 
   buyItem(itemId: number): Observable<void> {

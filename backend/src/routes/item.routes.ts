@@ -19,6 +19,8 @@ const itemRouter = express.Router();
  *      responses:
  *          200:
  *              description: Successfull search
+ *          404:
+ *              description: User is not found
  *          500:
  *              description: Internal server error
  */
@@ -99,7 +101,7 @@ itemRouter.post('', itemController.addNewItem);
 
 /**
  * @swagger
- * /api/item/modify/{id}:
+ * /api/item/{id}:
  *  put:
  *      tags:
  *      - ITEM
@@ -126,11 +128,11 @@ itemRouter.post('', itemController.addNewItem);
  *          403:
  *              description: Forbidden item is already sold
  *          404:
- *              description: Ftem not found
+ *              description: Item not found
  *          500:
  *              description: Internal server error
  */
-itemRouter.put('/modify/:id', itemController.setItemSalability);
+itemRouter.put('/:id', itemController.setItemSalability);
 
 /**
  * @swagger
