@@ -132,8 +132,8 @@ export const itemController = {
     const { userId } = jwtService.getTokenPayload(token);
     const { itemId } = req.body;
 
-    if (isNaN(+itemId)) {
-      next(badRequestError('Item id need to be a number'));
+    if (!itemId) {
+      next(badRequestError('Item id is required'));
       return;
     }
 
