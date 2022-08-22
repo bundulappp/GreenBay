@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../../src/app';
 import { GetAllSaleableItemViewModel } from '../../src/models/view/GetAllSaleableItemViewModel';
+import { itemRepository } from '../../src/repositories/itemRepository';
 import { itemService } from '../../src/services/itemService';
 import { jwtService } from '../../src/services/jwtService';
 
@@ -110,8 +111,106 @@ describe('GET /api/item', () => {
       .fn()
       .mockResolvedValue(expectedResponse);
     //Act
-    const result = await request(app).get('/api/item').send(expectedResponse);
+    const result = await request(app).get('/api/item').send();
+    //Assert
+    expect(itemService.getAllSelableItems).toHaveBeenCalledWith();
+    expect(itemService.getAllSelableItems).toHaveBeenCalledTimes(1);
+    expect(result.body).toEqual(expectedResponse);
+    expect(result.statusCode).toEqual(200);
+  });
+});
+
+describe('GET /api/item/:id', () => {
+  const token = 'Bearer asdaslkp212';
+  const tokenData = {
+    userId: 1,
+  };
+  beforeEach(() => {
+    jwtService.getTokenFromRequest = jest.fn().mockReturnValue(token);
+    jwtService.verifyToken = jest.fn().mockReturnValue(true);
+    jwtService.getTokenPayload = jest.fn().mockReturnValue(tokenData);
+    console.error = jest.fn();
+  });
+
+  it('get data successfully and get statusCode 200', async () => {
+    //Arrange
+    const itemId = 1;
+    const itemData = {
+      id: 1,
+      itemName: 'Huawei P20 pro',
+      description: 'super',
+      photoUrl:
+        'https://www.pgs.hu/images/thumbs/huawei-p20-pro-dual-sim-purple-rozbalene-balenie-vykup-391390.jpg',
+      price: 30,
+      selable: 2,
+      sellersName: 'UserName',
+    };
+    itemService.getItemData = jest.fn().mockResolvedValue(itemData);
+    //Act
+    const result = await request(app).get(`/api/item/${itemId}`).send();
+    //Assert
+    expect(itemService.getItemData).toHaveBeenCalledWith(itemId);
+    expect(itemService.getItemData).toHaveBeenCalledTimes(1);
+    expect(result.body).toEqual(itemData);
+    expect(result.statusCode).toEqual(200);
+  });
+});
+
+describe('PUT /api/item/:id', () => {
+  const token = 'Bearer asdaslkp212';
+  const tokenData = {
+    userId: 1,
+  };
+  beforeEach(() => {
+    jwtService.getTokenFromRequest = jest.fn().mockReturnValue(token);
+    jwtService.verifyToken = jest.fn().mockReturnValue(true);
+    jwtService.getTokenPayload = jest.fn().mockReturnValue(tokenData);
+    console.error = jest.fn();
+  });
+
+  it('item is not found and get 404', async () => {
+    //Arrange
+    const itemId = 45;
+    itemRepository.getItemById = jest.fn().mockResolvedValue(null);
+    //Act
+    const result = await request(app).put(`/api/item/${itemId}`).send();
+    //Assert
+    expect(result.statusCode).toEqual(404);
+  });
+
+  it('itemId is not a number and get a 400', async () => {
+    //Arrange
+    const itemId = 'fourty-five';
+    itemRepository.getItemById = jest.fn().mockResolvedValue(null);
+    //Act
+    const result = await request(app).get(`/api/item/${itemId}`).send();
+    //Assert
+    expect(result.statusCode).toEqual(400);
+  });
+
+  it('item is modified and get a 200', async () => {
+    //Arrange
+    const itemId = 1;
+    itemService.setItemSalability = jest.fn();
+    //Act
+    const result = await request(app).put(`/api/item/${itemId}`).send();
     //Assert
     expect(result.statusCode).toEqual(200);
   });
 });
+
+describe('PUT /api/item/buy', () => {
+  const token = 'Bearer asdaslkp212';
+  const tokenData = {
+    userId: 1,
+  };
+  beforeEach(() => {
+    jwtService.getTokenFromRequest = jest.fn().mockReturnValue(token);
+    jwtService.verifyToken = jest.fn().mockReturnValue(true);
+    jwtService.getTokenPayload = jest.fn().mockReturnValue(tokenData);
+    console.error = jest.fn();
+  });
+});
+//Arrange
+//Act
+//Assert
