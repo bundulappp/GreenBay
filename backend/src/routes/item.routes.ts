@@ -121,8 +121,6 @@ itemRouter.post('', itemController.addNewItem);
  *      responses:
  *          200:
  *              description: Item updated
- *          400:
- *              description: ItemId is missing
  *          401:
  *              description: Unauthorized
  *          403:
