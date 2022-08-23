@@ -1,9 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserWithDollarViewModel } from 'src/app/shared/models/UserWithDollarViewModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getUserDollar(): Observable<UserWithDollarViewModel> {
+    return this.http.get<UserWithDollarViewModel>('api/user-details/money');
+  }
 }
