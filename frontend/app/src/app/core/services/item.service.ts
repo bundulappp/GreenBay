@@ -67,9 +67,7 @@ export class ItemService {
           this.snackBarService.showSuccessMessage(
             'You bought the item successfully'
           );
-          this.authenticationService.getUserInfo().subscribe((x) => {
-            this.authenticationService.setUserDollar(x.dollar);
-          });
+
           this.router.navigate(['/main/list']);
         })
       );
