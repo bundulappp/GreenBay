@@ -25,6 +25,14 @@ export class AuthenticationService {
     localStorage.clear();
   }
 
+  setUsername(username: string): void {
+    localStorage.setItem('username', username);
+  }
+
+  getUsername(): string {
+    return localStorage.getItem('username') as string;
+  }
+
   register(userData: UserRegistrationRequestViewModel): Observable<void> {
     return this.http
       .post<void>(`${environment.apiUrl}/user/register`, userData)
@@ -42,6 +50,7 @@ export class AuthenticationService {
       .pipe(
         tap((response) => {
           this.setToken(response.token);
+          this.setUsername(response.username);
           this.router.navigate(['/main/list']);
         }),
         mapTo(undefined)
