@@ -1,7 +1,7 @@
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginRequestViewModel } from '../models/view/UserLoginRequestViewModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
-import { UserWithDollarViewModel } from '../models/view/UserWithDollarViewModel';
+import { UserDetailsViewModel } from '../models/view/UserDetailsViewModel';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError, unauthorizedError } from './generalErrorService';
 import { jwtService } from './jwtService';
@@ -45,10 +45,11 @@ export const userService = {
     };
   },
 
-  async getUserDollar(userId: number): Promise<UserWithDollarViewModel> {
+  async getUserDetails(userId: number): Promise<UserDetailsViewModel> {
     const userData = await userRepository.getUserById(userId);
 
     return {
+      username: userData.name,
       dollar: userData.dollar,
     };
   },

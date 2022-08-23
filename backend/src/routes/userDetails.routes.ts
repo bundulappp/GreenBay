@@ -25,7 +25,7 @@ const userDetailsRouter = express.Router();
  *          500:
  *              description: Internal server error
  */
-userDetailsRouter.get('/money', userController.getUserDollar);
+userDetailsRouter.get('/', userController.getUserDetails);
 
 /**
  * @swagger

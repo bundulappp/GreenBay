@@ -84,12 +84,12 @@ export const userController = {
     }
   },
 
-  async getUserDollar(req: Request, res: Response, next: NextFunction) {
+  async getUserDetails(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
 
     try {
-      const user = await userService.getUserDollar(userId);
+      const user = await userService.getUserDetails(userId);
       res.status(200).send(user);
     } catch (error) {
       next(error);
