@@ -20,6 +20,29 @@ export class ItemService {
     private authenticationService: AuthenticationService
   ) {}
 
+  getItemData(itemId: number): Observable<ItemDataViewModel> {
+    return this.http.get<ItemDataViewModel>(
+      `${environment.apiUrl}/item/${itemId}`
+    );
+  }
+
+  getAllSaleableItems(): Observable<ItemDataViewModel[]> {
+    return this.http.get<ItemDataViewModel[]>(`${environment.apiUrl}/item`);
+  }
+
+  getDisabledUserItem(): Observable<ItemDataViewModel[]> {
+    return this.http.get<ItemDataViewModel[]>(
+      `${environment.apiUrl}/user-details/item`
+    );
+  }
+
+  setItemSalability(itemId: number): Observable<void> {
+    return this.http.put<void>(
+      `${environment.apiUrl}/item/selable/${itemId}`,
+      null
+    );
+  }
+
   addNewItem(newItemObject: AddNewItemRequestViewModel): Observable<void> {
     return this.http
       .post<AddItemResponseViewModel>(
@@ -32,23 +55,6 @@ export class ItemService {
         }),
         map(() => undefined)
       );
-  }
-
-  getItemData(itemId: number): Observable<ItemDataViewModel> {
-    return this.http.get<ItemDataViewModel>(
-      `${environment.apiUrl}/item/${itemId}`
-    );
-  }
-
-  getAllSaleableItems(): Observable<ItemDataViewModel[]> {
-    return this.http.get<ItemDataViewModel[]>(`${environment.apiUrl}/item`);
-  }
-
-  setItemSalability(itemId: number): Observable<void> {
-    return this.http.put<void>(
-      `${environment.apiUrl}/item/selable/${itemId}`,
-      null
-    );
   }
 
   buyItem(itemId: number): Observable<void> {
@@ -67,11 +73,5 @@ export class ItemService {
           this.router.navigate(['/main/list']);
         })
       );
-  }
-
-  getDisabledUserItem(): Observable<ItemDataViewModel[]> {
-    return this.http.get<ItemDataViewModel[]>(
-      `${environment.apiUrl}/user-details/item`
-    );
   }
 }
