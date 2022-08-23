@@ -8,7 +8,7 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  userNameObservable$ = this.authenticationService.userNameObservable$;
+  username: string;
   userDollar: number;
 
   constructor(
@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUserDollar().subscribe((x) => {
+    this.userService.getUserDetails().subscribe((x) => {
+      this.username = x.username;
       this.userDollar = x.dollar;
     });
   }
