@@ -11,9 +11,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private userNameObject = new BehaviorSubject<string>(this.getUsername());
-  userNameObservable$ = this.userNameObject.asObservable();
-
   constructor(private http: HttpClient, private router: Router) {}
 
   getToken(): string {
@@ -26,14 +23,6 @@ export class AuthenticationService {
 
   clearLocalStorage(): void {
     localStorage.clear();
-  }
-
-  setUsername(username: string): void {
-    localStorage.setItem('username', username);
-  }
-
-  getUsername(): string {
-    return localStorage.getItem('username') as string;
   }
 
   register(userData: UserRegistrationRequestViewModel): Observable<void> {
@@ -53,7 +42,6 @@ export class AuthenticationService {
       .pipe(
         tap((response) => {
           this.setToken(response.token);
-          this.setUsername(response.username);
           this.router.navigate(['/main/list']);
         }),
         mapTo(undefined)
