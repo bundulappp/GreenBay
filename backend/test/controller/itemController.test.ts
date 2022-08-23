@@ -229,6 +229,3 @@ describe('PUT /api/item/buy', () => {
     expect(result.statusCode).toEqual(200);
   });
 });
-//Arrange
-//Act
-//Assert
