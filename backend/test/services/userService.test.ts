@@ -22,14 +22,15 @@ describe('userService, register', () => {
       dollar: 1000,
     };
     userRepository.getUserByName = jest.fn().mockResolvedValue(oldUserData);
+    userRepository.registerUser = jest.fn();
     try {
       //Act
       await userService.register(newUserData);
     } catch (error) {
       //Assert
-      // expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
-      // expect(userRepository.getUserByName).toHaveBeenCalledWith('UserName');
-      // expect(userRepository.registerUser).toHaveBeenCalledTimes(0);
+      expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
+      expect(userRepository.getUserByName).toHaveBeenCalledWith('UserName');
+      expect(userRepository.registerUser).toHaveBeenCalledTimes(0);
       expect(error).toStrictEqual(conflictError('Username is already taken.'));
     }
   });
@@ -64,11 +65,16 @@ describe('userService, login', () => {
       password: '12345678',
     };
     userRepository.getUserByName = jest.fn().mockResolvedValue(null);
+    passwordService.comparePasswords = jest.fn();
+    jwtService.generateAccessToken = jest.fn();
     try {
       //Act
       await userService.login(userData);
     } catch (error) {
       //Assert
+      expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
+      expect(userRepository.getUserByName).toHaveBeenCalledWith('UserName');
+      expect(passwordService.comparePasswords).toHaveBeenCalledTimes(0);
       expect(error).toStrictEqual(
         unauthorizedError('Username or password is incorrect!'),
       );
@@ -97,6 +103,13 @@ describe('userService, login', () => {
       await userService.login(userDataWithWrongPassword);
     } catch (error) {
       //Assert
+      expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
+      expect(userRepository.getUserByName).toHaveBeenCalledWith('UserName');
+      expect(passwordService.comparePasswords).toHaveBeenCalledTimes(1);
+      expect(passwordService.comparePasswords).toHaveBeenCalledWith(
+        '12345678',
+        'awdawda6546451613a5sdasd',
+      );
       expect(error).toStrictEqual(
         unauthorizedError('Username or password is incorrect!'),
       );
@@ -135,9 +148,14 @@ describe('userService, login', () => {
     //Act
     const result = await userService.login(userLoginData);
     //Assert
+    expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
+    expect(userRepository.getUserByName).toHaveBeenCalledWith('UserName');
+    expect(passwordService.comparePasswords).toHaveBeenCalledTimes(1);
+    expect(passwordService.comparePasswords).toHaveBeenCalledWith(
+      '12345678',
+      'awdawda6546451613a5sdasd',
+    );
+    expect(jwtService.generateAccessToken).toHaveBeenCalledTimes(1);
     expect(result).toStrictEqual(expectReturn);
   });
 });
-//Arrange
-//Act
-//Assert
