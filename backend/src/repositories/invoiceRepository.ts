@@ -1,6 +1,7 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connection';
 import { InvoiceDataDomainModel } from '../models/domian/InvoiceDataDomainModel';
+import { AddNewInvoiceRequestViewModel } from '../models/request/AddNewInvoiceRequestViewModel';
 import { utilService } from '../services/utilService';
 
 export const invoiceRepository = {
@@ -19,7 +20,9 @@ export const invoiceRepository = {
     return invoiceResult;
   },
 
-  async addNewInvoice(itemId: number, userId: number): Promise<number> {
+  async addNewInvoice(
+    invoiceData: AddNewInvoiceRequestViewModel,
+  ): Promise<void> {
     const addNewInvoiceQuery: string = `INSERT INTO
                                                 invoices(
                                                         item_id,
@@ -32,12 +35,10 @@ export const invoiceRepository = {
 
     const date = utilService.generateDateTimeToMysql(new Date());
 
-    const newInvoiceId = await db.query<OkPacket>(addNewInvoiceQuery, [
-      itemId.toString(),
+    await db.query<OkPacket>(addNewInvoiceQuery, [
+      invoiceData.itemId.toString(),
       date,
-      userId.toString(),
+      invoiceData.buyerId.toString(),
     ]);
-
-    return newInvoiceId.insertId;
   },
 };
