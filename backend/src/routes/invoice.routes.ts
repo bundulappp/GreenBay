@@ -1,4 +1,5 @@
 import express from 'express';
+import { invoiceController } from '../controllers/invoiceController';
 
 const invoiceRouter = express.Router();
 
@@ -38,6 +39,6 @@ const invoiceRouter = express.Router();
  *          500:
  *              description: Internal server error
  */
-invoiceRouter.post('');
+invoiceRouter.post('', invoiceController.addNewInvoice);
 
 export default invoiceRouter;
