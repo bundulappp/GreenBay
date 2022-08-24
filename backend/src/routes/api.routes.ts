@@ -5,6 +5,7 @@ import { swaggerDocs } from './swaggerOptions';
 import userRouter from './user.routes';
 import itemRouter from './item.routes';
 import userDetailsRouter from './userDetails.routes';
+import invoiceRouter from './invoice.routes';
 
 const apiRouter = express.Router();
 
@@ -14,5 +15,6 @@ apiRouter.use('/greenbay-api', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 apiRouter.use('/user', userRouter);
 apiRouter.use('/item', itemRouter);
 apiRouter.use('/user-details', userDetailsRouter);
+apiRouter.use('/invoice', invoiceRouter);
 
 export default apiRouter;
