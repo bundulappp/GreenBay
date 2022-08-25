@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { InvoiceDialogComponent } from './invoice-dialog/invoice-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [HeaderComponent, InvoiceDialogComponent],
@@ -29,6 +30,7 @@ import { InvoiceDialogComponent } from './invoice-dialog/invoice-dialog.componen
     MatSlideToggleModule,
     MatIconModule,
     FormsModule,
+    MatDialogModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -44,6 +46,7 @@ import { InvoiceDialogComponent } from './invoice-dialog/invoice-dialog.componen
     MatSlideToggleModule,
     MatIconModule,
     FormsModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}
