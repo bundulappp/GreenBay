@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
+import { InvoiceDataViewModel } from 'src/app/shared/models/InvoiceDataViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,16 +10,15 @@ import { environment } from 'src/environments/environment';
 export class InvoiceService {
   constructor(private http: HttpClient) {}
 
-  addNewInvoice(itemId: number): Observable<void> {
-    return this.http
-      .post<number>(`${environment.apiUrl}/invoice`, {
-        itemId,
-      })
-      .pipe(
-        tap((x) => {
-          console.log(x);
-        }),
-        map((x) => undefined)
-      );
+  getInvoiceById(invoiceId: number): Observable<InvoiceDataViewModel> {
+    return this.http.get<InvoiceDataViewModel>(
+      `${environment.apiUrl}/${invoiceId}`
+    );
+  }
+
+  addNewInvoice(itemId: number): Observable<number> {
+    return this.http.post<number>(`${environment.apiUrl}/invoice`, {
+      itemId,
+    });
   }
 }
