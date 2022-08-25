@@ -12,9 +12,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { InvoiceDialogComponent } from './invoice-dialog/invoice-dialog.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, InvoiceDialogComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
