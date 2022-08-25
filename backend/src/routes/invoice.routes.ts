@@ -3,6 +3,10 @@ import { invoiceController } from '../controllers/invoiceController';
 
 const invoiceRouter = express.Router();
 
+invoiceRouter.get('', invoiceController.getInvoiceByBuyerId);
+
+invoiceRouter.get('/:id', invoiceController.getInvoiceById);
+
 /**
  * @swagger
  * /api/invoice:
