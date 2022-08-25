@@ -14,6 +14,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialog } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [HeaderComponent, ConfirmDialog],
@@ -31,6 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     FormsModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -47,6 +51,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     FormsModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class SharedModule {}
