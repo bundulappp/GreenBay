@@ -6,12 +6,17 @@ import { UserLoginRequestViewModel } from 'src/app/shared/models/UserLoginReques
 import { UserLoginViewModel } from 'src/app/shared/models/UserLoginViewModel';
 import { UserRegistrationRequestViewModel } from 'src/app/shared/models/UserRegistrationRequestViewModel';
 import { environment } from 'src/environments/environment';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
   getToken(): string {
     return localStorage.getItem('token') as string;
@@ -39,6 +44,9 @@ export class AuthenticationService {
       .pipe(
         tap(() => {
           this.router.navigate(['/login']);
+          this.snackBarService.showSuccessMessage(
+            'You have registered successfully'
+          );
         }),
         catchError(() => of())
       );
@@ -52,6 +60,9 @@ export class AuthenticationService {
           this.setToken(response.token);
           this.setUsername(response.username);
           this.router.navigate(['/main/list']);
+          this.snackBarService.showSuccessMessage(
+            'You have logged in successfully'
+          );
         }),
         mapTo(undefined)
       );
