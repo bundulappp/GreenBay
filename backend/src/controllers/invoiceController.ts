@@ -39,8 +39,8 @@ export const invoiceController = {
     };
 
     try {
-      await invoiceService.addNewInvoice(invoiceData);
-      res.status(201).send();
+      const invoiceId = await invoiceService.addNewInvoice(invoiceData);
+      res.status(201).send({ invoiceId });
     } catch (error) {
       next(error);
     }

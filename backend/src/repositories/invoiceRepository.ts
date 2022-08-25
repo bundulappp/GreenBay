@@ -22,7 +22,7 @@ export const invoiceRepository = {
 
   async addNewInvoice(
     invoiceData: AddNewInvoiceRequestViewModel,
-  ): Promise<void> {
+  ): Promise<number> {
     const addNewInvoiceQuery: string = `INSERT INTO
                                                 invoices(
                                                         item_id,
@@ -35,10 +35,12 @@ export const invoiceRepository = {
 
     const date = utilService.generateDateTimeToMysql(new Date());
 
-    await db.query<OkPacket>(addNewInvoiceQuery, [
+    const invoice = await db.query<OkPacket>(addNewInvoiceQuery, [
       invoiceData.itemId.toString(),
       date,
       invoiceData.buyerId.toString(),
     ]);
+
+    return invoice.insertId;
   },
 };

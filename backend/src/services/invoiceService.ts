@@ -17,13 +17,13 @@ export const invoiceService = {
 
   async addNewInvoice(
     invoiceData: AddNewInvoiceRequestViewModel,
-  ): Promise<void> {
+  ): Promise<number> {
     const item = await itemService.getItemData(invoiceData.itemId);
 
     if (!item) {
       throw notFoundError('Item not found');
     }
 
-    await invoiceRepository.addNewInvoice(invoiceData);
+    return await invoiceRepository.addNewInvoice(invoiceData);
   },
 };
