@@ -23,6 +23,7 @@ const routes: Routes = [
         (m) => m.MainPageModule
       ),
   },
+  { path: 'invoice', loadChildren: () => import('./features/main-page/invoice/invoice.module').then(m => m.InvoiceModule) },
   {
     path: '**',
     loadChildren: () =>
