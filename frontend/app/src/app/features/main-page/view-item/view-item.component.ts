@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ItemService } from 'src/app/core/services/item.service';
-import { InvoiceDialogComponent } from 'src/app/shared/invoice-dialog/invoice-dialog.component';
+import { ConfirmDialog } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { ItemIsSelable } from 'src/app/shared/models/enums/ItemIsSellable';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 
@@ -40,11 +40,13 @@ export class ViewItemComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialog = this.dialog.open(InvoiceDialogComponent);
-
-    dialog.afterClosed().subscribe((x) => {
-      console.log(x);
+    const dialog = this.dialog.open(ConfirmDialog, {
+      data: {
+        itemId: this.itemData.id,
+      },
     });
+
+    dialog.afterClosed().subscribe();
   }
 
   backToMain(): void {
@@ -55,9 +57,5 @@ export class ViewItemComponent implements OnInit {
     this.itemService.setItemSalability(this.itemData.id).subscribe(() => {
       this.backToMain();
     });
-  }
-
-  buyItem(): void {
-    this.itemService.buyItem(this.itemData.id).subscribe();
   }
 }
