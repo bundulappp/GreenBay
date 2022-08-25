@@ -5,8 +5,18 @@ import { notFoundError } from './generalErrorService';
 import { itemService } from './itemService';
 
 export const invoiceService = {
-  async getInvoiceByBuyerId(invoiceId: number): Promise<InvoiceDataViewModel> {
-    const invoice = await invoiceRepository.getInvoiceByBuyerId(invoiceId);
+  async getInvoiceByBuyerId(buyerId: number): Promise<InvoiceDataViewModel[]> {
+    const invoice = await invoiceRepository.getInvoiceByBuyerId(buyerId);
+
+    if (!invoice) {
+      throw notFoundError('Invoice not found');
+    }
+
+    return invoice;
+  },
+
+  async getInvoiceById(invoiceId: number): Promise<InvoiceDataViewModel> {
+    const invoice = await invoiceRepository.getInvoiceById(invoiceId);
 
     if (!invoice) {
       throw notFoundError('Invoice not found');

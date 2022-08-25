@@ -6,6 +6,22 @@ import { badRequestError } from '../services/generalErrorService';
 import { AddNewInvoiceRequestViewModel } from '../models/request/AddNewInvoiceRequestViewModel';
 
 export const invoiceController = {
+  async getInvoiceByBuyerId(
+    req: Request,
+    res: Response<InvoiceDataViewModel[]>,
+    next: NextFunction,
+  ) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const invoice = await invoiceService.getInvoiceByBuyerId(userId);
+      res.status(200).send(invoice);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async getInvoiceById(
     req: Request,
     res: Response<InvoiceDataViewModel>,
@@ -15,7 +31,7 @@ export const invoiceController = {
     const { userId } = jwtService.getTokenPayload(token);
 
     try {
-      const invoice = await invoiceService.getInvoiceByBuyerId(userId);
+      const invoice = await invoiceService.getInvoiceById(userId);
       res.status(200).send(invoice);
     } catch (error) {
       next(error);

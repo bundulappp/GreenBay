@@ -5,16 +5,33 @@ import { AddNewInvoiceRequestViewModel } from '../models/request/AddNewInvoiceRe
 import { utilService } from '../services/utilService';
 
 export const invoiceRepository = {
-  async getInvoiceByBuyerId(buyerId: number): Promise<InvoiceDataDomainModel> {
-    const getInvoiceByIdQuery: string = `SELECT *
+  async getInvoiceByBuyerId(
+    buyerId: number,
+  ): Promise<InvoiceDataDomainModel[]> {
+    const getInvoiceByBuyerIdQuery: string = `SELECT *
                                          FROM
                                                 invoices
                                          WHERE
                                                 buyer_id = ?`;
 
+    const invoiceResult = await db.query<InvoiceDataDomainModel[]>(
+      getInvoiceByBuyerIdQuery,
+      [buyerId.toString()],
+    );
+
+    return invoiceResult;
+  },
+
+  async getInvoiceById(invoiceId: number): Promise<InvoiceDataDomainModel> {
+    const getInvoiceByIdQuery: string = `SELECT *
+                                         FROM
+                                                invoices
+                                         WHERE
+                                                id = ?`;
+
     const invoiceResult = await db.query<InvoiceDataDomainModel>(
       getInvoiceByIdQuery,
-      [buyerId.toString()],
+      [invoiceId.toString()],
     );
 
     return invoiceResult;
