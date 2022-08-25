@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ItemService } from 'src/app/core/services/item.service';
+import { InvoiceDialogComponent } from 'src/app/shared/invoice-dialog/invoice-dialog.component';
 import { ItemIsSelable } from 'src/app/shared/models/enums/ItemIsSellable';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 
@@ -19,7 +21,8 @@ export class ViewItemComponent implements OnInit {
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +36,14 @@ export class ViewItemComponent implements OnInit {
           this.isBelongToUser = false;
         }
       });
+    });
+  }
+
+  openDialog(): void {
+    const dialog = this.dialog.open(InvoiceDialogComponent);
+
+    dialog.afterClosed().subscribe((x) => {
+      console.log(x);
     });
   }
 
