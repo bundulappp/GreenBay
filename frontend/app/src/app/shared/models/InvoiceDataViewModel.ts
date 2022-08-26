@@ -1,6 +1,6 @@
 export interface InvoiceDataViewModel {
   id: number;
-  itemId: number;
-  purchaseDate: Date;
-  buyerId: number;
+  purchase_date: Date;
+  itemName: string;
+  price: number;
 }
