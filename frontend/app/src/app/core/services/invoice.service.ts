@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { InvoiceDataViewModel } from 'src/app/shared/models/InvoiceDataViewModel';
 import { environment } from 'src/environments/environment';
 import { SnackBarService } from './snack-bar.service';
@@ -14,9 +14,15 @@ export class InvoiceService {
     private snackBarService: SnackBarService
   ) {}
 
+  getInvoiceByBuyerId(): Observable<InvoiceDataViewModel[]> {
+    return this.http.get<InvoiceDataViewModel[]>(
+      `${environment.apiUrl}/invoice`
+    );
+  }
+
   getInvoiceById(invoiceId: number): Observable<InvoiceDataViewModel> {
     return this.http.get<InvoiceDataViewModel>(
-      `${environment.apiUrl}/${invoiceId}`
+      `${environment.apiUrl}/invoice/${invoiceId}`
     );
   }
 
