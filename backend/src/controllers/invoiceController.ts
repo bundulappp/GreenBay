@@ -4,11 +4,12 @@ import { jwtService } from '../services/jwtService';
 import { invoiceService } from '../services/invoiceService';
 import { badRequestError } from '../services/generalErrorService';
 import { AddNewInvoiceRequestViewModel } from '../models/request/AddNewInvoiceRequestViewModel';
+import { InvoiceDataWithItemDataViewModel } from '../models/view/InvoiceDataWithItemDataViewModel';
 
 export const invoiceController = {
   async getInvoiceByBuyerId(
     req: Request,
-    res: Response<InvoiceDataViewModel[]>,
+    res: Response<InvoiceDataWithItemDataViewModel[]>,
     next: NextFunction,
   ) {
     const token = jwtService.getTokenFromRequest(req);
