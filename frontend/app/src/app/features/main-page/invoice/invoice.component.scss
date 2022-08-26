@@ -1,13 +1,42 @@
-table {
-  width: 100%;
-}
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 100px;
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
+  .table {
+    padding-top: 20px;
+    width: 80%;
+  }
 
-td,
-th {
-  width: 25%;
+  .mat-column-id {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+  }
+
+  .mat-column-purchase_date {
+    padding-left: 16px;
+    font-size: 20px;
+  }
+
+  .mat-column-name {
+    font-style: italic;
+  }
+
+  .mat-column-price {
+    width: 32px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .button-container {
+    width: 10%;
+    height: 10%;
+    padding-top: 20px;
+
+    button {
+      color: green;
+    }
+  }
 }
