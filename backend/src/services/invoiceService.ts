@@ -1,11 +1,14 @@
 import { AddNewInvoiceRequestViewModel } from '../models/request/AddNewInvoiceRequestViewModel';
 import { InvoiceDataViewModel } from '../models/view/InvoiceDataViewModel';
+import { InvoiceDataWithItemDataViewModel } from '../models/view/InvoiceDataWithItemDataViewModel';
 import { invoiceRepository } from '../repositories/invoiceRepository';
 import { notFoundError } from './generalErrorService';
 import { itemService } from './itemService';
 
 export const invoiceService = {
-  async getInvoiceByBuyerId(buyerId: number): Promise<InvoiceDataViewModel[]> {
+  async getInvoiceByBuyerId(
+    buyerId: number,
+  ): Promise<InvoiceDataWithItemDataViewModel[]> {
     const invoice = await invoiceRepository.getInvoiceByBuyerId(buyerId);
 
     if (!invoice) {
