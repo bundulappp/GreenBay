@@ -58,13 +58,15 @@ describe('Post /api/item', () => {
 
   it('Status code 201 when item is created', async () => {
     //Arrange
-    //Act
-    const result = await request(app).post('/api/item').send({
+    const itemData = {
       name: 'phone',
       description: 'Huawei P20 pro',
       photoUrl: 'https://hu.wikipedia.org/wiki/Macska',
       price: 1200,
-    });
+    };
+    itemService.addNewItem = jest.fn();
+    //Act
+    const result = await request(app).post('/api/item').send(itemData);
     //Assert
     expect(result.statusCode).toEqual(201);
   });
