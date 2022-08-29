@@ -23,7 +23,7 @@ describe('itemService, add new item', () => {
     itemRepository.addNewItem = jest.fn();
     try {
       //Act
-      const result = await itemService.addNewItem(itemData);
+      await itemService.addNewItem(itemData);
     } catch (error) {
       //Assert
       expect(userRepository.getUserById).toHaveBeenCalledTimes(1);
