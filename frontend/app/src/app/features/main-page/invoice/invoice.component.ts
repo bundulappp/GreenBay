@@ -18,12 +18,4 @@ export class InvoiceComponent implements OnInit {
       this.userInvoices = x;
     });
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as any).value;
-    console.log(filterValue);
-    this.userInvoices.find((x) => {
-      x.itemName === filterValue;
-    });
-  }
 }
