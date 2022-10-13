@@ -57,7 +57,7 @@ export const itemController = {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
 
-    const { name, description, photoUrl, price } = req.body;
+    const { name, description, photoUrl, price, category } = req.body;
 
     if (!name) {
       next(badRequestError('Item name is required'));
@@ -76,6 +76,11 @@ export const itemController = {
 
     if (!price) {
       next(badRequestError('Item price is required'));
+      return;
+    }
+
+    if (!category) {
+      next(badRequestError('Item category is required'));
       return;
     }
 
@@ -99,6 +104,7 @@ export const itemController = {
       photoUrl,
       price,
       userId,
+      category,
     };
 
     try {
