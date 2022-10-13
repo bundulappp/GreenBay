@@ -126,6 +126,9 @@ itemRouter.put('/buy', itemController.buyItem);
  *                price:
  *                  type: int
  *                  example: 1200
+ *                category:
+ *                  type: int
+ *                  example: 1
  *      responses:
  *          201:
  *              description: Created
