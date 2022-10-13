@@ -1,6 +1,7 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connection';
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
+import { CategoryType } from '../models/enums/CategoryType';
 import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 
 export const itemRepository = {
@@ -57,6 +58,7 @@ export const itemRepository = {
     photoUrl: string,
     price: number,
     userId: number,
+    category: CategoryType,
   ): Promise<number> {
     const addNewItemQuery: string = `INSERT INTO
                                         items(
@@ -64,10 +66,11 @@ export const itemRepository = {
                                             description, 
                                             photoUrl, 
                                             price, 
-                                            userId
+                                            userId,
+                                            categoryId
                                         )
                                 VALUES (
-                                    ?,?,?,?,?
+                                    ?,?,?,?,?,?
                                 )`;
 
     const newItemResult = await db.query<OkPacket>(addNewItemQuery, [
@@ -76,6 +79,7 @@ export const itemRepository = {
       photoUrl,
       price.toString(),
       userId.toString(),
+      category.toString(),
     ]);
 
     return newItemResult.insertId;

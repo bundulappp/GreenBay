@@ -41,6 +41,7 @@ export const itemService = {
       newItem.photoUrl,
       newItem.price,
       newItem.userId,
+      newItem.category,
     );
   },
 
