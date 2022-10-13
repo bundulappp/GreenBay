@@ -121,7 +121,7 @@ itemRouter.put('/buy', itemController.buyItem);
  *                  example: Huawei P20 pro
  *                photoUrl:
  *                  type: string
- *                  example: https://hu.wikipedia.org/wiki/Macska
+ *                  example: https://img.fruugo.com/product/9/23/154693239_max.jpg
  *                  summary: Should be a valid URL
  *                price:
  *                  type: int
