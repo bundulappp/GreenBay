@@ -16,6 +16,7 @@ import { ConfirmDialog } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [HeaderComponent, ConfirmDialog],
@@ -35,6 +36,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSelectModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -53,6 +55,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSelectModule,
   ],
 })
 export class SharedModule {}
