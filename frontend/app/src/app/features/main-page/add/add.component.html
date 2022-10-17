@@ -2,26 +2,40 @@
   <h1 class="title">Add new item</h1>
   <div class="form-container">
     <form [formGroup]="form">
-      <mat-form-field>
+      <mat-form-field class="field">
         <mat-label>Item name</mat-label>
         <input formControlName="name" matInput />
+        <mat-error *ngIf="name.invalid">Name is required</mat-error>
       </mat-form-field>
       <br />
-      <mat-form-field>
+      <mat-form-field class="field">
         <mat-label>Description</mat-label>
         <input formControlName="description" matInput />
+        <mat-error *ngIf="description.invalid"
+          >Description is required</mat-error
+        >
       </mat-form-field>
       <br />
-      <mat-form-field>
+      <mat-form-field class="field">
         <mat-label>Photo Url</mat-label>
         <input formControlName="photoUrl" matInput />
+        <mat-error *ngIf="photoUrl.invalid">PhotoUrl is required</mat-error>
       </mat-form-field>
       <br />
-      <mat-form-field>
+      <mat-form-field class="field">
         <mat-label>Price</mat-label>
         <input type="number" formControlName="price" matInput />
       </mat-form-field>
       <br />
+      <mat-form-field class="field">
+        <mat-label>Select Category</mat-label>
+        <mat-select>
+          <mat-option> -- </mat-option>
+          <mat-option *ngFor="let cat of categorys" [value]="cat">{{
+            cat.name | titlecase
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div class="button-container">
         <button (click)="addItem()" mat-raised-button>ADD PRODUCT</button>
         <button (click)="back()" mat-raised-button>BACK</button>
