@@ -1,3 +1,4 @@
+import { ItemCategoryDomainModel } from '../models/domian/itemCategoryDomainModel';
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { ItemIsSelable } from '../models/enums/ItemIsSellable';
 import { AddNewItemRequestModel } from '../models/request/AddNewItemRequestModel';
@@ -26,6 +27,10 @@ export const itemService = {
     userId: number,
   ): Promise<GetItemsByUserIdViewModel[]> {
     return await itemRepository.getDisabledItemsByUserId(userId);
+  },
+
+  async getAllCategories(): Promise<ItemCategoryDomainModel[]> {
+    return await itemRepository.getAllCategories();
   },
 
   async addNewItem(newItem: AddNewItemRequestModel): Promise<number> {
