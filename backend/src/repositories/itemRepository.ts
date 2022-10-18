@@ -1,5 +1,6 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connection';
+import { ItemCategoryDomainModel } from '../models/domian/itemCategoryDomainModel';
 import { ItemDataDomainModel } from '../models/domian/ItemDataDomainModel';
 import { CategoryType } from '../models/enums/CategoryType';
 import { ItemIsSelable } from '../models/enums/ItemIsSellable';
@@ -50,6 +51,12 @@ export const itemRepository = {
       userId.toString(),
       ItemIsSelable.unsalable.toString(),
     ]);
+  },
+
+  async getAllCategories(): Promise<ItemCategoryDomainModel[]> {
+    const getCategoryQuery: string = `SELECT * FROM categories`;
+
+    return await db.query<ItemCategoryDomainModel[]>(getCategoryQuery);
   },
 
   async addNewItem(
