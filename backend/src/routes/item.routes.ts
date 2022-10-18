@@ -26,6 +26,8 @@ const itemRouter = express.Router();
  */
 itemRouter.get('', itemController.getAllSaleableItems);
 
+itemRouter.get('/category', itemController.getAllCategories);
+
 /**
  * @swagger
  * /api/item/{id}:
