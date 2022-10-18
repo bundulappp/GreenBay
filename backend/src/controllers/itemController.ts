@@ -53,6 +53,15 @@ export const itemController = {
     }
   },
 
+  async getAllCategories(req: Request, res: Response, next: NextFunction) {
+    try {
+      const categories = await itemService.getAllCategories();
+      res.status(200).send(categories);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async addNewItem(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
