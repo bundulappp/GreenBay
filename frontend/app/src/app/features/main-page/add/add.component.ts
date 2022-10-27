@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -8,21 +8,15 @@ import {
 import { Router } from '@angular/router';
 import { ItemService } from 'src/app/core/services/item.service';
 import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequestViewModel';
+import { ItemCategoryViewModel } from 'src/app/shared/models/ItemCategoryViewModel';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
 })
-export class AddComponent {
-  categorys = [
-    { id: 1, name: 'electronics' },
-    { id: 1, name: 'home' },
-    { id: 1, name: 'clothes' },
-    { id: 1, name: 'sport' },
-    { id: 1, name: 'books' },
-    { id: 1, name: 'heath&beauty  ' },
-  ];
+export class AddComponent implements OnInit {
+  categorys: ItemCategoryViewModel[] = [];
 
   form = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -33,6 +27,12 @@ export class AddComponent {
   });
 
   constructor(private itemService: ItemService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.itemService.getAllCategories().subscribe((categ) => {
+      this.categorys = categ;
+    });
+  }
 
   addItem() {
     if (this.form.valid) {
