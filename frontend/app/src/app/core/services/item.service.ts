@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { AddItemResponseViewModel } from 'src/app/shared/models/AddItemResponseViewModel';
 import { AddNewItemRequestViewModel } from 'src/app/shared/models/AddNewItemRequestViewModel';
+import { ItemCategoryViewModel } from 'src/app/shared/models/ItemCategoryViewModel';
 import { ItemDataViewModel } from 'src/app/shared/models/ItemDataViewModel';
 import { environment } from 'src/environments/environment';
 import { SnackBarService } from './snack-bar.service';
@@ -26,6 +27,12 @@ export class ItemService {
 
   getAllSaleableItems(): Observable<ItemDataViewModel[]> {
     return this.http.get<ItemDataViewModel[]>(`${environment.apiUrl}/item`);
+  }
+
+  getAllCategories(): Observable<ItemCategoryViewModel[]> {
+    return this.http.get<ItemCategoryViewModel[]>(
+      `${environment.apiUrl}/item/category`
+    );
   }
 
   getDisabledUserItem(): Observable<ItemDataViewModel[]> {
